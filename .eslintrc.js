@@ -37,7 +37,7 @@ module.exports = {
     'react/no-array-index-key': 'off',
     'react/require-default-props': 'off',
     'react/jsx-props-no-spreading': 'off',
-    'react-hooks/exhaustive-deps': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
     'react/function-component-definition': [
       2,
       {namedComponents: 'arrow-function'},

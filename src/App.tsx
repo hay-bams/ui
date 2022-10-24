@@ -1,7 +1,20 @@
- export const App = () => (
-  <div className="App">
-    <h1 className="text-red-500">hello</h1>
-  </div>
+import {Button} from 'components/Button';
+import { ButtonUnstyled } from 'components/ButtonUnstyled';
+import styled from 'styled-components';
+
+const AppContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`
+
+export const App = () => (
+  <AppContainer>
+    <Button variant='outline' />
+
+    {/* <ButtonUnstyled /> */}
+  </AppContainer>
 );
 
 export default App;
