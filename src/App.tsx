@@ -11,7 +11,7 @@ const AppContainer = styled.div`
 
 export const App = () => (
   <AppContainer>
-    <Button variant='outline' />
+    <Button variant='default' />
 
     {/* <ButtonUnstyled /> */}
   </AppContainer>

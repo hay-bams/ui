@@ -1,11 +1,18 @@
 import {ReactNode} from 'react';
 import styled, {css} from 'styled-components';
-import {colors, textColor} from './Button.styles';
+import {borderColor, colors, textColor} from './Button.styles';
 import {ButtonVariants, ButtonVariantsEnum} from './Button.types';
 
 interface Props {
   children?: ReactNode;
   variant?: ButtonVariants;
+}
+
+export const hasBorder = (variants: ButtonVariants) => {
+ if(variants === ButtonVariantsEnum.outline || variants === ButtonVariantsEnum.default) {
+  return true
+ }
+ return false
 }
 
 const ButtonStyled = styled.button<Record<'variant', ButtonVariants>>`
@@ -16,9 +23,9 @@ const ButtonStyled = styled.button<Record<'variant', ButtonVariants>>`
   border-radius: 5px;
   font-size: 14px;
   ${(props) =>
-    props.variant === ButtonVariantsEnum.outline &&
+    hasBorder(props.variant) &&
     css`
-      border: 1px solid ${textColor[props.variant]};
+      border: 1px solid ${borderColor[props.variant]};
     `}
 `;
 
