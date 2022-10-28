@@ -1,5 +1,6 @@
+import { Btn } from 'components/Btn/Btn';
 import {Button} from 'components/Button';
-import { ButtonUnstyled } from 'components/ButtonUnstyled';
+// import { ButtonUnstyled } from 'components/ButtonUnstyled';
 import styled from 'styled-components';
 
 const AppContainer = styled.div`
@@ -11,7 +12,9 @@ const AppContainer = styled.div`
 
 export const App = () => (
   <AppContainer>
-    <Button variant='default' />
+    {/* <Button variant='default' /> */}
+
+    <Btn>Log out</Btn>
 
     {/* <ButtonUnstyled /> */}
   </AppContainer>

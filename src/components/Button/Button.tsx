@@ -9,11 +9,14 @@ interface Props {
 }
 
 export const hasBorder = (variants: ButtonVariants) => {
- if(variants === ButtonVariantsEnum.outline || variants === ButtonVariantsEnum.default) {
-  return true
- }
- return false
-}
+  if (
+    variants === ButtonVariantsEnum.outline ||
+    variants === ButtonVariantsEnum.default
+  ) {
+    return true;
+  }
+  return false;
+};
 
 const ButtonStyled = styled.button<Record<'variant', ButtonVariants>>`
   background: ${(props) => colors[props.variant]};
