@@ -1,7 +1,8 @@
-// import { Btn } from 'components/Btn/Btn';
+import styled from 'styled-components';
+
 import {Button} from 'components/Button';
 // import { ButtonUnstyled } from 'components/ButtonUnstyled';
-import styled from 'styled-components';
+// import { Btn } from 'components/Btn/Btn';
 
 const AppContainer = styled.div`
   display: flex;
@@ -12,7 +13,9 @@ const AppContainer = styled.div`
 
 export const App = () => (
   <AppContainer>
-    <Button variant="filled" size='xl'  />
+    <Button variant="filled" size="xl">
+      Settings
+    </Button>
 
     {/* <Btn as='a' href='#'>Log out</Btn> */}
 

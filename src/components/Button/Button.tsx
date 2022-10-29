@@ -1,5 +1,6 @@
 import {ComponentProps, ElementType, ReactNode} from 'react';
 import styled, {css} from 'styled-components';
+
 import {borderColor, colors, textColor} from './Button.styles';
 import {ButtonSizes, ButtonStyledProps, ButtonVariants} from './Button.types';
 import {buttonSizes} from './Button.utils';
@@ -47,12 +48,3 @@ export const Button = <T extends ElementType>({
     {children}
   </ButtonStyled>
 );
-
-/**
- * 
- * 
- *   ${(props) =>
-    css`
-     ${...buttonSizes.xs}
-    `};
- */

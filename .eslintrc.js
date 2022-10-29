@@ -14,7 +14,7 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["react", "react-hooks", "@typescript-eslint", "prettier"],
+  plugins: ["react", "react-hooks", "@typescript-eslint", "prettier", 'import'],
   rules: {
     'react/react-in-jsx-scope': 'off',
     'react/jsx-no-bind': 'off',
@@ -22,6 +22,7 @@ module.exports = {
     'react/jsx-fragments': 'off',
     'react/jsx-filename-extension': [1, {extensions: ['.tsx']}],
     'no-unused-vars': 'off',
+    'import/order': ['warn', { 'newlines-between': 'always' }],
     '@typescript-eslint/no-unused-vars': 'warn',
     '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
