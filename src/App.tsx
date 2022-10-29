@@ -12,7 +12,7 @@ const AppContainer = styled.div`
 
 export const App = () => (
   <AppContainer>
-    <Button variant="filled" as="a" href="#" />
+    <Button variant="filled" size='xl'  />
 
     {/* <Btn as='a' href='#'>Log out</Btn> */}
 

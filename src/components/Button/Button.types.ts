@@ -1,9 +1,13 @@
-export type ButtonVariants = 'filled' | 'light' | 'outline' | 'default' | 'subtle'
+export type ButtonVariants =
+  | 'filled'
+  | 'light'
+  | 'outline'
+  | 'default'
+  | 'subtle';
 
-export enum ButtonVariantsEnum {
-  filled = 'filled',
-  light = 'light',
-  outline = 'outline',
-  default = 'default',
-  subtle = 'subtle',
-}
+export type ButtonSizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+
+export type ButtonStyledVariant = Record<'variant', ButtonVariants>;
+export type ButtonStyledSize = Record<'size', ButtonSizes>;
+
+export type ButtonStyledProps = ButtonStyledVariant & ButtonStyledSize;
