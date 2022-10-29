@@ -7,12 +7,17 @@ export default {
   Component: Button,
   args: {
     children: 'Button',
-    variant: 'filled'
+    variant: 'filled',
+    size: 'xs'
   },
   argTypes: {
     variant: {
       options: ['filled', 'light','outline', 'default', 'subttle'],
-      control: {type: 'radio'}
+      control: {type: 'select'}
+    },
+    size: {
+      options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      control: {type: 'select'}
     }
   }
 } as ComponentMeta<typeof Button>
@@ -20,3 +25,4 @@ export default {
 const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />
 
 export const Default = Template.bind({})
+
