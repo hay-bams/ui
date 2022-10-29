@@ -1,4 +1,4 @@
-import { Btn } from 'components/Btn/Btn';
+// import { Btn } from 'components/Btn/Btn';
 import {Button} from 'components/Button';
 // import { ButtonUnstyled } from 'components/ButtonUnstyled';
 import styled from 'styled-components';
@@ -8,13 +8,13 @@ const AppContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-`
+`;
 
 export const App = () => (
   <AppContainer>
-    {/* <Button variant='default' /> */}
+    <Button variant="filled" as="a" href="#" />
 
-    <Btn>Log out</Btn>
+    {/* <Btn as='a' href='#'>Log out</Btn> */}
 
     {/* <ButtonUnstyled /> */}
   </AppContainer>
