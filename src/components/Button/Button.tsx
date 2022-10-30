@@ -1,14 +1,19 @@
 import {ComponentProps, ElementType, ReactNode} from 'react';
 import styled, {css} from 'styled-components';
 
-import {borderColors, buttonColors, textColors} from './Button.styles';
+import {
+  borderColors,
+  buttonColors,
+  textColors,
+  buttonSizes,
+  disabledButton,
+} from './Button.styles';
 import {
   ButtonColor,
   ButtonSizes,
   ButtonStyledProps,
   ButtonVariants,
 } from './Button.types';
-import {buttonSizes} from './Button.utils';
 
 interface OwnProps<T extends ElementType> {
   children?: ReactNode;
@@ -16,6 +21,7 @@ interface OwnProps<T extends ElementType> {
   color?: ButtonColor;
   size?: ButtonSizes;
   as?: T;
+  disabled?: boolean;
 }
 
 type Props<T extends ElementType> = OwnProps<T> & ComponentProps<T>;
@@ -40,7 +46,9 @@ const ButtonStyled = styled.button<ButtonStyledProps>`
         ${hasBorder(props.variant)
           ? ` ${borderColors[props.color][props.variant]}`
           : 'transparent'};
-      ${buttonSizes[props.size]}
+      ${buttonSizes[props.size]};
+      ${props.disabled && disabledButton}
+      
     `}
 `;
 
@@ -50,9 +58,16 @@ export const Button = <T extends ElementType>({
   as = 'button',
   size = 'xs',
   color = 'primary',
+  disabled = false,
   ...rest
 }: Props<T>) => (
-  <ButtonStyled color={color} variant={variant} as={as} {...rest} size={size}>
+  <ButtonStyled
+    disabled={disabled}
+    color={color}
+    variant={variant}
+    as={as}
+    {...rest}
+    size={size}>
     {children}
   </ButtonStyled>
 );

@@ -9,7 +9,8 @@ export default {
     children: 'Button',
     variant: 'filled',
     size: 'xs',
-    color: 'primary'
+    color: 'primary',
+    disabled: false
   },
   argTypes: {
     variant: {
