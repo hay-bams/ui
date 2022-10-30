@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 import {Button} from 'components/Button';
-// import { ButtonUnstyled } from 'components/ButtonUnstyled';
 // import { Btn } from 'components/Btn/Btn';
 
 export const AppContainer = styled.div`
@@ -18,8 +17,6 @@ export const App = () => (
     </Button>
 
     {/* <Btn as='a' href='#'>Log out</Btn> */}
-
-    {/* <ButtonUnstyled /> */}
   </AppContainer>
 );
 
