@@ -12,11 +12,11 @@ export type ButtonColor = 'primary' | 'secondary' | 'neutral';
 export type ButtonStyledVariant = Record<'variant', ButtonVariants>;
 export type ButtonStyledSize = Record<'size', ButtonSizes>;
 export type ButtonStyledColor = Record<'color', ButtonColor>;
-export type OthrerStyledProps = {
+export type OtherStyledProps = {
   uppercase: boolean;
 };
 
 export type ButtonStyledProps = ButtonStyledVariant &
   ButtonStyledSize &
   ButtonStyledColor &
-  OthrerStyledProps;
+  OtherStyledProps;
