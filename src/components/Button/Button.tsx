@@ -7,8 +7,10 @@ import {
   textColors,
   buttonSizes,
   disabledButton,
+  borderRadius,
 } from './Button.styles';
 import {
+  BorderRadius,
   ButtonColor,
   ButtonSizes,
   ButtonStyledProps,
@@ -20,6 +22,7 @@ interface OwnProps<T extends ElementType> {
   variant?: ButtonVariants;
   color?: ButtonColor;
   size?: ButtonSizes;
+  radius?: BorderRadius
   as?: T;
   disabled?: boolean;
   upperCase?: boolean;
@@ -38,7 +41,7 @@ const ButtonStyled = styled.button<ButtonStyledProps>`
   background: ${(props) => buttonColors[props.color][props.variant]};
   color: ${(props) => textColors[props.color][props.variant]};
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: ${(props) => borderRadius[props.radius]};
   width: auto;
   text-transform: ${(props) => props.uppercase && 'uppercase'};
 
@@ -61,11 +64,13 @@ export const Button = <T extends ElementType>({
   as = 'button',
   size = 'xs',
   color = 'primary',
+  radius = 'xs',
   disabled = false,
   upperCase = false,
   ...rest
 }: Props<T>) => (
   <ButtonStyled
+    radius={radius}
     disabled={disabled}
     color={color}
     variant={variant}

@@ -134,3 +134,11 @@ export const disabledButton = {
   'pointer-events': 'none',
   'user-select': 'none',
 };
+
+export const borderRadius = {
+  xs: '2px',
+  sm: '4px',
+  md: '8px',
+  lg: '16px',
+  xl: '32px'
+}

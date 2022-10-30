@@ -11,7 +11,8 @@ export default {
     size: 'xs',
     color: 'primary',
     disabled: false,
-    uppercase: false
+    uppercase: false,
+    radius: 'xs'
   },
   argTypes: {
     variant: {
@@ -23,6 +24,10 @@ export default {
       control: {type: 'select'}
     },
     size: {
+      options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      control: {type: 'select'}
+    },
+    radius: {
       options: ['xs', 'sm', 'md', 'lg', 'xl'],
       control: {type: 'select'}
     }
