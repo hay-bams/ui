@@ -8,11 +8,16 @@ export default {
   args: {
     children: 'Button',
     variant: 'filled',
-    size: 'xs'
+    size: 'xs',
+    color: 'primary'
   },
   argTypes: {
     variant: {
       options: ['filled', 'light','outline', 'default', 'subtle'],
+      control: {type: 'select'}
+    },
+    color: {
+      options: ['primary', 'secondary','neutral'],
       control: {type: 'select'}
     },
     size: {

@@ -11,7 +11,7 @@ export const colorVariants: ColorVariants = {
     light: '#E6FCF5',
     dark: '#087F5B',
   },
-  tertiary: {
+  neutral: {
     main: '#ADB5BD',
     light: '#F8F9FA',
     dark: '#212529',

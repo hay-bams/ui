@@ -4,6 +4,6 @@ export interface ColorPaleteOptions {
   dark: string;
 }
 
-export type ColorPaletes = 'primary' | 'secondary' | 'tertiary';
+export type ColorPaletes = 'primary' | 'secondary' | 'neutral';
 
 export type ColorVariants = Record<ColorPaletes, ColorPaleteOptions>;

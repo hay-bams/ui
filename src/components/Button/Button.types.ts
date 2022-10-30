@@ -7,7 +7,12 @@ export type ButtonVariants =
 
 export type ButtonSizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
+export type ButtonColor = 'primary' | 'secondary' | 'neutral';
+
 export type ButtonStyledVariant = Record<'variant', ButtonVariants>;
 export type ButtonStyledSize = Record<'size', ButtonSizes>;
+export type ButtonStyledColor = Record<'color', ButtonColor>;
 
-export type ButtonStyledProps = ButtonStyledVariant & ButtonStyledSize;
+export type ButtonStyledProps = ButtonStyledVariant &
+  ButtonStyledSize &
+  ButtonStyledColor;
