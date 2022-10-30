@@ -6,7 +6,7 @@ interface Props {
 }
 
 const StyledButtonUnstyled = styled.button`
-  border: 0.5px solid 
+  border: 0.5px solid;
 `;
 
 

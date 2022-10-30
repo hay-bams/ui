@@ -24,6 +24,7 @@ export const hasBorder = (variants: ButtonVariants) => {
 const ButtonStyled = styled.button<ButtonStyledProps>`
   background: ${(props) => colors[props.variant]};
   color: ${(props) => textColor[props.variant]};
+  cursor: pointer;
   border-radius: 5px;
   width: auto;
 

@@ -12,7 +12,7 @@ export default {
   },
   argTypes: {
     variant: {
-      options: ['filled', 'light','outline', 'default', 'subttle'],
+      options: ['filled', 'light','outline', 'default', 'subtle'],
       control: {type: 'select'}
     },
     size: {

@@ -4,7 +4,7 @@ import {Button} from 'components/Button';
 // import { ButtonUnstyled } from 'components/ButtonUnstyled';
 // import { Btn } from 'components/Btn/Btn';
 
-const AppContainer = styled.div`
+export const AppContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,8 +13,8 @@ const AppContainer = styled.div`
 
 export const App = () => (
   <AppContainer>
-    <Button variant="filled" size="xl">
-      Settings
+    <Button size="sm" variant="light">
+      Button text
     </Button>
 
     {/* <Btn as='a' href='#'>Log out</Btn> */}
