@@ -1,6 +1,7 @@
+import { DecoratorFn } from '@storybook/react';
 import {AppContainer} from '../src/App';
 
-const withAppContainer = (StoryFn) => (
+const withAppContainer: DecoratorFn = (StoryFn) => (
   <AppContainer>
     <StoryFn />
   </AppContainer>
