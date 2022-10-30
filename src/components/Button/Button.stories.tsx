@@ -10,7 +10,8 @@ export default {
     variant: 'filled',
     size: 'xs',
     color: 'primary',
-    disabled: false
+    disabled: false,
+    uppercase: false
   },
   argTypes: {
     variant: {

@@ -22,6 +22,7 @@ interface OwnProps<T extends ElementType> {
   size?: ButtonSizes;
   as?: T;
   disabled?: boolean;
+  upperCase?: boolean;
 }
 
 type Props<T extends ElementType> = OwnProps<T> & ComponentProps<T>;
@@ -39,6 +40,7 @@ const ButtonStyled = styled.button<ButtonStyledProps>`
   cursor: pointer;
   border-radius: 5px;
   width: auto;
+  text-transform: ${(props) => props.uppercase && 'uppercase'};
 
   ${(props) =>
     css`
@@ -48,6 +50,7 @@ const ButtonStyled = styled.button<ButtonStyledProps>`
           : 'transparent'};
       ${buttonSizes[props.size]};
       ${props.disabled && disabledButton}
+    
       
     `}
 `;
@@ -59,6 +62,7 @@ export const Button = <T extends ElementType>({
   size = 'xs',
   color = 'primary',
   disabled = false,
+  upperCase = false,
   ...rest
 }: Props<T>) => (
   <ButtonStyled
@@ -66,6 +70,7 @@ export const Button = <T extends ElementType>({
     color={color}
     variant={variant}
     as={as}
+    upperCase={upperCase}
     {...rest}
     size={size}>
     {children}
