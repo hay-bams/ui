@@ -11,7 +11,7 @@ export const AppContainer = styled.div`
 
 export const App = () => (
   <AppContainer>
-    <Button size="sm" variant="light">
+    <Button size="xs" variant="filled" loading>
       Button text
     </Button>
   </AppContainer>

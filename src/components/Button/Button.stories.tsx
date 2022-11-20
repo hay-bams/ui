@@ -1,6 +1,6 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 
-import { Button } from './Button'
+import {Button} from './Button';
 
 export default {
   title: 'Components/Button',
@@ -12,29 +12,42 @@ export default {
     color: 'primary',
     disabled: false,
     uppercase: false,
-    radius: 'xs'
+    radius: 'xs',
+    loading: false,
   },
   argTypes: {
     variant: {
-      options: ['filled', 'light','outline', 'default', 'subtle'],
-      control: {type: 'select'}
+      options: ['filled', 'light', 'outline', 'default', 'subtle'],
+      control: {type: 'select'},
     },
     color: {
-      options: ['primary', 'secondary','neutral'],
-      control: {type: 'select'}
+      options: ['primary', 'secondary', 'neutral'],
+      control: {type: 'select'},
     },
     size: {
       options: ['xs', 'sm', 'md', 'lg', 'xl'],
-      control: {type: 'select'}
+      control: {type: 'select'},
     },
     radius: {
       options: ['xs', 'sm', 'md', 'lg', 'xl'],
-      control: {type: 'select'}
-    }
-  }
-} as ComponentMeta<typeof Button>
+      control: {type: 'select'},
+    },
+  },
+} as ComponentMeta<typeof Button>;
 
-const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />
+const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
-export const Default = Template.bind({})
+export const Primary = Template.bind({});
+Primary.args = {
+  color: 'primary',
+};
 
+export const Secondary = Template.bind({});
+Secondary.args = {
+  color: 'secondary',
+};
+
+export const Neutral = Template.bind({});
+Neutral.args = {
+  color: 'neutral',
+};

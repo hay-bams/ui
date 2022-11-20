@@ -140,5 +140,29 @@ export const borderRadius = {
   sm: '4px',
   md: '8px',
   lg: '16px',
-  xl: '32px'
-}
+  xl: '32px',
+};
+
+export const spinnerSize = {
+  xs: {
+    height: '15px',
+    width: '15px',
+  },
+  sm: {
+    height: '17px',
+    width: '17px',
+  },
+  md: {
+    height: '19px',
+    width: '19px',
+  },
+  lg: {
+    height: '21px',
+    width: '21px',
+  },
+  xl: {
+    height: '23px',
+    width: '23px',
+  },
+};
+

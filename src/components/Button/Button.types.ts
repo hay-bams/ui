@@ -17,6 +17,7 @@ export type ButtonStyledColor = Record<'color', ButtonColor>;
 export type ButtonStyledRadius = Record<'radius', BorderRadius>;
 export type OtherStyledProps = {
   uppercase: boolean;
+  loading: boolean
 };
 
 export type ButtonStyledProps = ButtonStyledVariant &
@@ -24,3 +25,5 @@ export type ButtonStyledProps = ButtonStyledVariant &
   ButtonStyledColor &
   ButtonStyledRadius &
   OtherStyledProps;
+
+export type ButtonSpinnerProps =  ButtonStyledVariant & ButtonStyledSize & ButtonStyledColor;
