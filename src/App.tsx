@@ -1,6 +1,8 @@
+import {useState} from 'react';
 import styled from 'styled-components';
 
 import {Button} from 'components/Button';
+import {Modal} from 'components/Modal';
 
 export const AppContainer = styled.div`
   display: flex;
@@ -9,12 +11,16 @@ export const AppContainer = styled.div`
   height: 100vh;
 `;
 
-export const App = () => (
-  <AppContainer>
-    <Button size="xs" variant="filled" loading>
-      Button text
-    </Button>
-  </AppContainer>
-);
+export const App = () => {
+  const [showModal, setShowModal] = useState(false);
+  return (
+    <AppContainer>
+      <Button size="xs" variant="filled" onClick={() => setShowModal(true)}>
+        Show Modal
+      </Button>
+      <Modal open={showModal} onClose={() => setShowModal(false)} />
+    </AppContainer>
+  );
+};
 
 export default App;

@@ -17,7 +17,7 @@ export type ButtonStyledColor = Record<'color', ButtonColor>;
 export type ButtonStyledRadius = Record<'radius', BorderRadius>;
 export type OtherStyledProps = {
   uppercase: boolean;
-  loading: boolean
+  $loading: boolean
 };
 
 export type ButtonStyledProps = ButtonStyledVariant &

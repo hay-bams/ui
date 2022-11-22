@@ -1,6 +1,9 @@
-import {ComponentProps, ElementType, ReactNode} from 'react';
+import React, {
+  ComponentProps,
+  ElementType,
+  ReactNode,
+} from 'react';
 import styled, {css, keyframes} from 'styled-components';
-
 
 import {
   borderColors,
@@ -21,6 +24,14 @@ import {
 } from './Button.types';
 
 import {ReactComponent as LoadingIcon} from 'assets/icons/Spinner.svg';
+
+
+declare module "react" {
+  function forwardRef<T, P = Record<string, unknown>>(
+    render: (props: P, ref: React.Ref<T>) => React.ReactElement | null
+  ): (props: P & React.RefAttributes<T>) => React.ReactElement | null;
+}
+
 interface OwnProps<T extends ElementType> {
   children?: ReactNode;
   variant?: ButtonVariants;
@@ -79,8 +90,16 @@ const ButtonStyled = styled.button<ButtonStyledProps>`
   border-radius: ${(props) => borderRadius[props.radius]};
   width: auto;
   text-transform: ${(props) => props.uppercase && 'uppercase'};
-  display: ${(props) => props.loading && 'flex'};
-  align-items: ${(props) => props.loading && 'center'};
+  display: ${(props) => props.$loading && 'flex'};
+  align-items: ${(props) => props.$loading && 'center'};
+  transition-property: transform;
+  transition-duration: 0.2s;
+  // &:hover {
+  //   transform: scale(1.06)
+  // }
+  // &:active {
+  //   transform: translateY(10px)
+  // }
 
   ${(props) =>
     css`
@@ -93,21 +112,25 @@ const ButtonStyled = styled.button<ButtonStyledProps>`
     `}
 `;
 
-export const Button = <T extends ElementType>({
-  children = 'Settings',
-  variant = 'filled',
-  as = 'button',
-  size = 'xs',
-  color = 'primary',
-  radius = 'xs',
-  disabled = false,
-  upperCase = false,
-  loading = false,
-  ...rest
-}: Props<T>) => (
+export const ButtonInner = <T extends ElementType = 'button'>(
+  {
+    children = 'Settings',
+    variant = 'filled',
+    as = 'button',
+    size = 'xs',
+    color = 'primary',
+    radius = 'xs',
+    disabled = false,
+    upperCase = false,
+    loading = false,
+    ...rest
+  }: Props<T>,
+  ref: React.ForwardedRef<HTMLElement>,
+) => (
   <ButtonStyled
+    ref={ref}
     radius={radius}
-    loading={loading}
+    $loading={loading}
     disabled={disabled || loading}
     color={color}
     variant={variant}
@@ -124,3 +147,5 @@ export const Button = <T extends ElementType>({
     {children}
   </ButtonStyled>
 );
+
+export const Button = React.forwardRef(ButtonInner);
