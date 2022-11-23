@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import {ModalStyledProps} from './Modal.types';
 import {modalSizes} from './Modal.styles';
 
-import {ModalPortal} from 'components/Portals/MenuPortal';
+import {ModalPortal} from 'components/Portals/ModalPortal';
 import {ReactComponent as CloseIcon} from 'assets/icons/Close.svg';
 
 interface Props {
