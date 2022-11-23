@@ -1,7 +1,12 @@
 import {ReactNode} from 'react';
 import styled from 'styled-components';
 
-import {ModalSizes, ModalStyledProps, ModalWrapperProps} from './Modal.types';
+import {
+  ModalSizes,
+  ModalStyledProps,
+  ModalTitleContainerStyledProps,
+  ModalWrapperProps,
+} from './Modal.types';
 import {modalSizes} from './Modal.styles';
 
 import {ModalPortal} from 'components/Portals/ModalPortal';
@@ -40,9 +45,9 @@ const ModalContainer = styled.div<ModalStyledProps>`
   width: ${(props) => modalSizes[props.size].width};
 `;
 
-const ModalTitleContainer = styled.div`
+const ModalTitleContainer = styled.div<ModalTitleContainerStyledProps>`
   display: flex;
-  justify-content: space-between;
+  justify-content: ${(props) => (props.title ? 'space-between' : 'flex-end')};
 `;
 
 const ModalTitle = styled.div``;
@@ -81,7 +86,7 @@ export const Modal = ({
       <Backdrop>
         <ModalWrapper centered={centered}>
           <ModalContainer size={size}>
-            <ModalTitleContainer>
+            <ModalTitleContainer title={title}>
               {title ? <ModalTitle>{title}</ModalTitle> : null}
               {withCloseButton ? (
                 <CloseIconContainer onClick={onClose}>

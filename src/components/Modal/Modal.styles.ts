@@ -19,4 +19,7 @@ export const modalSizes: ModalSizeDimension = {
   xl: {
     width: '780px',
   },
+  auto: {
+    width: 'auto'
+  }
 };

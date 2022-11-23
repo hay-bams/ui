@@ -1,4 +1,6 @@
-export type ModalSizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | string;
+import { ReactNode } from "react";
+
+export type ModalSizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'auto' | string;
 
 export type ModalStyledSizes = Record<'size', ModalSizes>
 
@@ -12,4 +14,8 @@ export type ModalStyledProps = ModalStyledSizes
 
 export interface ModalWrapperProps {
   centered?: boolean
+}
+
+export interface ModalTitleContainerStyledProps {
+  title?: any;
 }

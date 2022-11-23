@@ -25,7 +25,6 @@ export const App = () => {
         onClose={() => setShowModal(false)}
         size="md"
         title="Introduce yourself!"
-        centered
         >
         <Form>
           <Label htmlFor="firstName">First Name</Label>
@@ -61,6 +60,15 @@ export const App = () => {
           />
         </Form>
       </Modal>
+
+      {/* <Modal
+        title="Modal size auto"
+        open={showModal}
+        onClose={() => setShowModal(false)}
+        centered
+        size="auto">
+        Main content for the new automative modal
+      </Modal> */}
     </AppContainer>
   );
 };
