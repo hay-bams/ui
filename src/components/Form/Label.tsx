@@ -2,6 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import styled, {css, CSSObject} from 'styled-components';
 
 type FormStyleLabelType = Record<'sx', CSSObject | undefined>;
+
 export const FormLabel = styled.label<FormStyleLabelType>`
   display: inline-block;
   ${(props) =>
