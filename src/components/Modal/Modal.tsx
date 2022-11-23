@@ -1,7 +1,7 @@
 import {ReactNode} from 'react';
 import styled from 'styled-components';
 
-import {ModalStyledProps} from './Modal.types';
+import {ModalSizes, ModalStyledProps} from './Modal.types';
 import {modalSizes} from './Modal.styles';
 
 import {ModalPortal} from 'components/Portals/MenuPortal';
@@ -9,8 +9,11 @@ import {ReactComponent as CloseIcon} from 'assets/icons/Close.svg';
 
 interface Props {
   open?: boolean;
-  content?: ReactNode;
+  children?: ReactNode;
   onClose?: () => void;
+  size?: ModalSizes;
+  title?: ReactNode;
+  showCloseIcon?: boolean;
 }
 
 const ModalWrapper = styled.div`
@@ -47,7 +50,10 @@ const CloseIconContainer = styled.div`
   cursor: pointer;
 `;
 
-const ModalBody = styled.div``;
+const ModalBody = styled.div`
+ margin-block: 20px;
+ 
+`;
 
 const Backdrop = styled.div`
   position: fixed;
@@ -58,20 +64,30 @@ const Backdrop = styled.div`
   background: rgba(0, 0, 0, 0.5);
 `;
 
-export const Modal = ({open = false, content, onClose = () => {}}: Props) => (
+export const Modal = ({
+  open = false,
+  children,
+  onClose = () => {},
+  size = 'xs',
+  title,
+  showCloseIcon = false,
+}: Props) => (
   <ModalPortal>
     {open ? (
       <Backdrop>
         <ModalWrapper>
           <ModalInnerWrapper>
-            <ModalContainer size="sm">
+            <ModalContainer size={size}>
               <ModalTitleContainer>
-                <ModalTitle>Title</ModalTitle>
-                <CloseIconContainer onClick={onClose}>
-                  <CloseIcon />
-                </CloseIconContainer>
+                {title ? <ModalTitle>{title}</ModalTitle> : null}
+                {showCloseIcon ? (
+                  <CloseIconContainer onClick={onClose}>
+                    <CloseIcon />
+                  </CloseIconContainer>
+                ) : null}
               </ModalTitleContainer>
-              <ModalBody>{content || null}</ModalBody>
+
+              <ModalBody>{children || null}</ModalBody>
             </ModalContainer>
           </ModalInnerWrapper>
         </ModalWrapper>
