@@ -23,9 +23,10 @@ export const App = () => {
       <Modal
         open={showModal}
         onClose={() => setShowModal(false)}
-        size="lg"
+        size="md"
         title="Introduce yourself!"
-        showCloseIcon>
+        centered
+        >
         <Form>
           <Label htmlFor="firstName">First Name</Label>
           <Break />

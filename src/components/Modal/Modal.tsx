@@ -1,7 +1,7 @@
 import {ReactNode} from 'react';
 import styled from 'styled-components';
 
-import {ModalSizes, ModalStyledProps} from './Modal.types';
+import {ModalSizes, ModalStyledProps, ModalWrapperProps} from './Modal.types';
 import {modalSizes} from './Modal.styles';
 
 import {ModalPortal} from 'components/Portals/ModalPortal';
@@ -13,20 +13,24 @@ interface Props {
   onClose?: () => void;
   size?: ModalSizes;
   title?: ReactNode;
-  showCloseIcon?: boolean;
+  withCloseButton?: boolean;
+  centered?: boolean;
 }
 
-const ModalWrapper = styled.div`
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-`;
+// const ModalWrapper = styled.div`
+// // position: fixed;
+// // inset: 0;
+//   // width: 100%;
+//   // height: 100%;
+//   // border: 2px solid blue;
+// `;
 
-const ModalInnerWrapper = styled.div`
+const ModalWrapper = styled.div<ModalWrapperProps>`
   display: flex;
   justify-content: center;
+  align-items: ${(props) => (props.centered ? 'center' : 'flex-start')};
   padding: 48px 16px;
+  height: 100%;
 `;
 
 const ModalContainer = styled.div<ModalStyledProps>`
@@ -51,17 +55,16 @@ const CloseIconContainer = styled.div`
 `;
 
 const ModalBody = styled.div`
- margin-block: 20px;
- 
+  margin-block: 20px;
 `;
 
 const Backdrop = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   height: 100vh;
   width: 100vw;
   background: rgba(0, 0, 0, 0.5);
+  z-index: 2;
 `;
 
 export const Modal = ({
@@ -70,26 +73,25 @@ export const Modal = ({
   onClose = () => {},
   size = 'xs',
   title,
-  showCloseIcon = false,
+  withCloseButton = true,
+  centered = false,
 }: Props) => (
   <ModalPortal>
     {open ? (
       <Backdrop>
-        <ModalWrapper>
-          <ModalInnerWrapper>
-            <ModalContainer size={size}>
-              <ModalTitleContainer>
-                {title ? <ModalTitle>{title}</ModalTitle> : null}
-                {showCloseIcon ? (
-                  <CloseIconContainer onClick={onClose}>
-                    <CloseIcon />
-                  </CloseIconContainer>
-                ) : null}
-              </ModalTitleContainer>
+        <ModalWrapper centered={centered}>
+          <ModalContainer size={size}>
+            <ModalTitleContainer>
+              {title ? <ModalTitle>{title}</ModalTitle> : null}
+              {withCloseButton ? (
+                <CloseIconContainer onClick={onClose}>
+                  <CloseIcon />
+                </CloseIconContainer>
+              ) : null}
+            </ModalTitleContainer>
 
-              <ModalBody>{children || null}</ModalBody>
-            </ModalContainer>
-          </ModalInnerWrapper>
+            <ModalBody>{children || null}</ModalBody>
+          </ModalContainer>
         </ModalWrapper>
       </Backdrop>
     ) : null}

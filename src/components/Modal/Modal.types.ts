@@ -9,3 +9,7 @@ interface ModalSizeDimensionValue {
 export type ModalSizeDimension = Record<ModalSizes, ModalSizeDimensionValue>
 
 export type ModalStyledProps = ModalStyledSizes
+
+export interface ModalWrapperProps {
+  centered?: boolean
+}
