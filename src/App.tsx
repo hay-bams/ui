@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 import styled from 'styled-components';
 
 import {Button} from 'components/Button';
@@ -359,7 +359,7 @@ export const App = () => {
 
       <Modal
         open={showModal}
-        onClose={() => setShowModal(false)}
+        onClose={useCallback(() => setShowModal(false), [])}
         size="md"
         title="Introduce yourself!">
         <Form>

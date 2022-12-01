@@ -116,7 +116,6 @@ export const Modal = ({
 
     return () => window.removeEventListener('mousedown', evt);
   }, [onClose]);
-  console.log('$$$$');
 
   return (
     <ModalPortal>
