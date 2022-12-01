@@ -18,9 +18,6 @@ interface Props extends React.HTMLAttributes<HTMLLabelElement> {
 
 export const Label = ({children, htmlFor, sx, ...rest}: Props) => {
   const ref = useRef<HTMLLabelElement>(null);
-  useEffect(() => {
-    console.log(ref, '$$$$$$$$');
-  }, []);
 
   return (
     <FormLabel sx={sx} htmlFor={htmlFor} {...rest} ref={ref}>

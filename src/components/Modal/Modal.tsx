@@ -1,4 +1,4 @@
-import {ReactNode, useEffect} from 'react';
+import {ReactNode, useEffect, useRef} from 'react';
 import styled, {css} from 'styled-components';
 
 import {
@@ -26,7 +26,7 @@ interface Props {
   overlayColor?: string;
   overlayOpacity?: number;
   overlayBlur?: number;
-  overflow?: ModalOverflowProps
+  overflow?: ModalOverflowProps;
 }
 
 const ModalWrapper = styled.div`
@@ -81,7 +81,6 @@ const ModalBody = styled.div<ModalBodyProps>`
   padding-bottom: 40px;
 `;
 
-
 export const Modal = ({
   open = false,
   children,
@@ -90,12 +89,12 @@ export const Modal = ({
   title,
   withCloseButton = true,
   centered = false,
-  overflow='outside',
+  overflow = 'outside',
   overlayBlur,
   overlayColor,
   overlayOpacity,
-
 }: Props) => {
+  const modalRef = useRef<any>(null);
   useEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden';
@@ -105,6 +104,20 @@ export const Modal = ({
       document.body.style.overflow = 'unset';
     };
   }, [open]);
+
+  useEffect(() => {
+    const evt = (e: Event) => {
+      if (!modalRef.current) return;
+      if (!modalRef.current.contains(e.target)) {
+        onClose();
+      }
+    };
+    window.addEventListener('mousedown', evt);
+
+    return () => window.removeEventListener('mousedown', evt);
+  }, [onClose]);
+  console.log('$$$$');
+
   return (
     <ModalPortal>
       {open ? (
@@ -116,7 +129,7 @@ export const Modal = ({
           />
           <ModalWrapper>
             <ModalInnerWrapper centered={centered} overflow={overflow}>
-              <ModalContainer size={size}>
+              <ModalContainer size={size} ref={modalRef}>
                 <ModalTitleContainer title={title}>
                   {title ? <ModalTitle>{title}</ModalTitle> : null}
                   {withCloseButton ? (
