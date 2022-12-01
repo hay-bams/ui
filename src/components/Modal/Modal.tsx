@@ -7,6 +7,7 @@ import {
   ModalTitleContainerStyledProps,
   ModalInnerWrapperProps,
   ModalBodyProps,
+  ModalOverflowProps,
 } from './Modal.types';
 import {modalSizes} from './Modal.styles';
 
@@ -25,6 +26,7 @@ interface Props {
   overlayColor?: string;
   overlayOpacity?: number;
   overlayBlur?: number;
+  overflow?: ModalOverflowProps
 }
 
 const ModalWrapper = styled.div`
@@ -88,9 +90,11 @@ export const Modal = ({
   title,
   withCloseButton = true,
   centered = false,
+  overflow='outside',
   overlayBlur,
   overlayColor,
   overlayOpacity,
+
 }: Props) => {
   useEffect(() => {
     if (open) {
@@ -111,7 +115,7 @@ export const Modal = ({
             overlayOpacity={overlayOpacity}
           />
           <ModalWrapper>
-            <ModalInnerWrapper centered={centered} overflow="inside">
+            <ModalInnerWrapper centered={centered} overflow={overflow}>
               <ModalContainer size={size}>
                 <ModalTitleContainer title={title}>
                   {title ? <ModalTitle>{title}</ModalTitle> : null}
@@ -122,7 +126,7 @@ export const Modal = ({
                   ) : null}
                 </ModalTitleContainer>
 
-                <ModalBody overflow="inside">{children || null}</ModalBody>
+                <ModalBody overflow={overflow}>{children || null}</ModalBody>
               </ModalContainer>
             </ModalInnerWrapper>
           </ModalWrapper>
