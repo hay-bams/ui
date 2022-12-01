@@ -10,10 +10,17 @@ interface ModalSizeDimensionValue {
 
 export type ModalSizeDimension = Record<ModalSizes, ModalSizeDimensionValue>
 
-export type ModalStyledProps = ModalStyledSizes
+export type ModalStyledProps = ModalStyledSizes;
 
-export interface ModalWrapperProps {
-  centered?: boolean
+export type ModalOverflowProps = 'outside' | 'inside'
+
+export interface ModalInnerWrapperProps {
+  centered?: boolean;
+  overflow: ModalOverflowProps
+}
+
+export interface ModalBodyProps {
+  overflow: ModalOverflowProps
 }
 
 export interface ModalTitleContainerStyledProps {

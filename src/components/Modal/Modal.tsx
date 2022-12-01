@@ -1,11 +1,12 @@
-import {ReactNode} from 'react';
-import styled from 'styled-components';
+import {ReactNode, useEffect} from 'react';
+import styled, {css} from 'styled-components';
 
 import {
   ModalSizes,
   ModalStyledProps,
   ModalTitleContainerStyledProps,
-  ModalWrapperProps,
+  ModalInnerWrapperProps,
+  ModalBodyProps,
 } from './Modal.types';
 import {modalSizes} from './Modal.styles';
 
@@ -34,12 +35,14 @@ const ModalWrapper = styled.div`
   z-index: 1;
 `;
 
-const ModalInnerWrapper = styled.div<ModalWrapperProps>`
+const ModalInnerWrapper = styled.div<ModalInnerWrapperProps>`
   display: flex;
   justify-content: center;
-  align-items: ${(props) => (props.centered ? 'center' : 'flex-start')};
   padding: 48px 16px;
+  align-items: ${(props) => (props.centered ? 'center' : 'flex-start')};
   height: 100%;
+  overflow-y: ${(props) =>
+    props.overflow === 'outside' ? 'scroll' : 'hidden'};
 `;
 
 const ModalContainer = styled.div<ModalStyledProps>`
@@ -65,9 +68,17 @@ const CloseIconContainer = styled.div`
   cursor: pointer;
 `;
 
-const ModalBody = styled.div`
+const ModalBody = styled.div<ModalBodyProps>`
   margin-block: 20px;
+  overflow-y: ${(props) =>
+    props.overflow === 'outside' ? 'hidden' : 'scroll'};
+  ${(props) =>
+    css`
+      ${props.overflow === 'inside' && 'max-height: calc(100vh - 185px)'}
+    `};
+  padding-bottom: 40px;
 `;
+
 
 export const Modal = ({
   open = false,
@@ -80,32 +91,43 @@ export const Modal = ({
   overlayBlur,
   overlayColor,
   overlayOpacity,
-}: Props) => (
-  <ModalPortal>
-    {open ? (
-      <>
-        <Backdrop
-          overlayBlur={overlayBlur}
-          overlayColor={overlayColor}
-          overlayOpacity={overlayOpacity}
-        />
-        <ModalWrapper>
-          <ModalInnerWrapper centered={centered}>
-            <ModalContainer size={size}>
-              <ModalTitleContainer title={title}>
-                {title ? <ModalTitle>{title}</ModalTitle> : null}
-                {withCloseButton ? (
-                  <CloseIconContainer onClick={onClose}>
-                    <CloseIcon />
-                  </CloseIconContainer>
-                ) : null}
-              </ModalTitleContainer>
+}: Props) => {
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+    }
 
-              <ModalBody>{children || null}</ModalBody>
-            </ModalContainer>
-          </ModalInnerWrapper>
-        </ModalWrapper>
-      </>
-    ) : null}
-  </ModalPortal>
-);
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [open]);
+  return (
+    <ModalPortal>
+      {open ? (
+        <>
+          <Backdrop
+            overlayBlur={overlayBlur}
+            overlayColor={overlayColor}
+            overlayOpacity={overlayOpacity}
+          />
+          <ModalWrapper>
+            <ModalInnerWrapper centered={centered} overflow="inside">
+              <ModalContainer size={size}>
+                <ModalTitleContainer title={title}>
+                  {title ? <ModalTitle>{title}</ModalTitle> : null}
+                  {withCloseButton ? (
+                    <CloseIconContainer onClick={onClose}>
+                      <CloseIcon />
+                    </CloseIconContainer>
+                  ) : null}
+                </ModalTitleContainer>
+
+                <ModalBody overflow="inside">{children || null}</ModalBody>
+              </ModalContainer>
+            </ModalInnerWrapper>
+          </ModalWrapper>
+        </>
+      ) : null}
+    </ModalPortal>
+  );
+};
