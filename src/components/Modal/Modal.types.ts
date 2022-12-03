@@ -16,7 +16,8 @@ export type ModalOverflowProps = 'outside' | 'inside'
 
 export interface ModalInnerWrapperProps {
   centered?: boolean;
-  overflow: ModalOverflowProps
+  overflow: ModalOverflowProps;
+  
 }
 
 export interface ModalBodyProps {

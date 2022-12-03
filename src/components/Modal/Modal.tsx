@@ -1,5 +1,5 @@
 import {ReactNode, useEffect, useRef} from 'react';
-import styled, {css} from 'styled-components';
+import styled, {css, keyframes} from 'styled-components';
 
 import {
   ModalSizes,
@@ -14,6 +14,7 @@ import {modalSizes} from './Modal.styles';
 import {ModalPortal} from 'components/Portals/ModalPortal';
 import {ReactComponent as CloseIcon} from 'assets/icons/Close.svg';
 import {Backdrop} from 'components/Backdrop';
+import {fade} from 'components/Transitions';
 
 interface Props {
   open?: boolean;
@@ -45,6 +46,9 @@ const ModalInnerWrapper = styled.div<ModalInnerWrapperProps>`
   height: 100%;
   overflow-y: ${(props) =>
     props.overflow === 'outside' ? 'scroll' : 'hidden'};
+  animation-name: ${() => fade(1)};
+  animation-duration: 600ms;
+  animation-timing-function: ease;
 `;
 
 const ModalContainer = styled.div<ModalStyledProps>`

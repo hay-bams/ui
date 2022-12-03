@@ -361,6 +361,7 @@ export const App = () => {
         open={showModal}
         onClose={useCallback(() => setShowModal(false), [])}
         size="md"
+        // overlayOpacity={0.9}
         title="Introduce yourself!">
         <Form>
           <Label htmlFor="firstName">First Name</Label>
