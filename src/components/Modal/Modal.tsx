@@ -15,6 +15,7 @@ import {ModalPortal} from 'components/Portals/ModalPortal';
 import {ReactComponent as CloseIcon} from 'assets/icons/Close.svg';
 import {Backdrop} from 'components/Backdrop';
 import {fade} from 'components/Transitions';
+import {useClickOutside} from 'hooks/useClickOutside';
 
 interface Props {
   open?: boolean;
@@ -99,6 +100,7 @@ export const Modal = ({
   overlayOpacity,
 }: Props) => {
   const modalRef = useRef<any>(null);
+  useClickOutside(modalRef, onClose);
   useEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden';
@@ -108,18 +110,6 @@ export const Modal = ({
       document.body.style.overflow = 'unset';
     };
   }, [open]);
-
-  useEffect(() => {
-    const evt = (e: Event) => {
-      if (!modalRef.current) return;
-      if (!modalRef.current.contains(e.target)) {
-        onClose();
-      }
-    };
-    window.addEventListener('mousedown', evt);
-
-    return () => window.removeEventListener('mousedown', evt);
-  }, [onClose]);
 
   return (
     <ModalPortal>
