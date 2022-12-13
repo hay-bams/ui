@@ -1,13 +1,15 @@
-import {ReactNode, useEffect} from 'react';
+import {ReactNode, useEffect, useRef} from 'react';
 import styled from 'styled-components';
 
 import {DrawerPortal} from 'components/Portals/DrawerPortal';
 import {Backdrop} from 'components/Backdrop';
+import {useClickOutside} from 'hooks/useClickOutside';
 
 interface Props {
   children?: ReactNode;
   open?: boolean;
   onClose?: () => void;
+  title?: ReactNode;
 }
 
 const DrawerWrapper = styled.div`
@@ -18,7 +20,22 @@ const DrawerWrapper = styled.div`
   background: #fff;
 `;
 
-export const Drawer = ({children, open, onClose}: Props) => {
+const DrawerContainer = styled.div`
+  padding-inline: 20px;
+  padding-block: 20px;
+  overflow-y: scroll;
+  height: 100%;
+`;
+
+const DrawerTitle = styled.div`
+  margin-bottom: 20px;
+`;
+
+const DrawerBody = styled.div``;
+
+export const Drawer = ({children, open, onClose = () => {}, title}: Props) => {
+  const drawerRef = useRef<any>(null);
+  useClickOutside(drawerRef, onClose);
   useEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden';
@@ -32,7 +49,13 @@ export const Drawer = ({children, open, onClose}: Props) => {
   return open ? (
     <DrawerPortal>
       <Backdrop />
-      <DrawerWrapper>{children}</DrawerWrapper>
+      <DrawerWrapper ref={drawerRef}>
+        <DrawerContainer>
+          {title ? <DrawerTitle>{title}</DrawerTitle> : null}
+
+          <DrawerBody>{children}</DrawerBody>
+        </DrawerContainer>
+      </DrawerWrapper>
     </DrawerPortal>
   ) : null;
 };

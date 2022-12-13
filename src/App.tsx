@@ -15,7 +15,7 @@ export const AppContainer = styled.div`
 `;
 
 export const App = () => {
-  const [showDrawer, setShowDrawer] = useState(true);
+  const [showDrawer, setShowDrawer] = useState(false);
   return (
     <AppContainer>
       <Button size="xs" variant="filled" onClick={() => setShowDrawer(true)}>
@@ -364,10 +364,47 @@ export const App = () => {
         size="md"
         // overlayOpacity={0.9}
         title="Introduce yourself!">
-  Modal
+        <Form>
+          <Label htmlFor="firstName">First Name</Label>
+          <Break />
+          <Input id="firstName" type="text" placeholder="First name" />
+
+          <Label sx={{marginTop: '20px'}} htmlFor="lastName">
+            Last Name
+          </Label>
+          <Break />
+          <Input id="lastName" type="text" placeholder="Last Name" />
+
+          <Label sx={{marginTop: '20px'}} htmlFor="email">
+            Email
+          </Label>
+          <Break />
+          <Input id="email" type="email" placeholder="Email" />
+
+          <Label sx={{marginTop: '20px'}} htmlFor="password">
+            Password
+          </Label>
+          <Break />
+          <Input id="password" type="password" placeholder="Password" />
+
+          <Label sx={{marginTop: '20px'}} htmlFor="confirmPassword">
+            Confirm Password
+          </Label>
+          <Break />
+          <Input
+            id="confirmPassword"
+            type="password"
+            placeholder="Confirm Password"
+          />
+
+
+        </Form>
       </Modal> */}
 
-      <Drawer open={showDrawer} onClose={() => setShowDrawer(false)}>
+      <Drawer
+        open={showDrawer}
+        onClose={() => setShowDrawer(false)}
+        title="Drawer header">
         <Form>
           <Label htmlFor="firstName">First Name</Label>
           <Break />
