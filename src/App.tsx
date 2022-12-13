@@ -5,6 +5,7 @@ import {Button} from 'components/Button';
 import {Modal} from 'components/Modal';
 import {Form, Input, Label} from 'components/Form';
 import {Break} from 'components/Break';
+import {Drawer} from 'components/Drawer';
 
 export const AppContainer = styled.div`
   // display: flex;
@@ -14,11 +15,11 @@ export const AppContainer = styled.div`
 `;
 
 export const App = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [showDrawer, setShowDrawer] = useState(true);
   return (
     <AppContainer>
-      <Button size="xs" variant="filled" onClick={() => setShowModal(true)}>
-        Show Modal
+      <Button size="xs" variant="filled" onClick={() => setShowDrawer(true)}>
+        Show Drawer
       </Button>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi,
@@ -357,9 +358,9 @@ export const App = () => {
         asperiores eaque modi libero ex, perspiciatis totam.
       </p>
 
-      <Modal
-        open={showModal}
-        onClose={useCallback(() => setShowModal(false), [])}
+      {/* <Modal
+        open={showDrawer}
+        onClose={useCallback(() => setShowDrawer(false), [])}
         size="md"
         // overlayOpacity={0.9}
         title="Introduce yourself!">
@@ -566,16 +567,11 @@ export const App = () => {
             placeholder="Confirm Password"
           />
         </Form>
-      </Modal>
-
-      {/* <Modal
-        title="Modal size auto"
-        open={showModal}
-        onClose={() => setShowModal(false)}
-        centered
-        size="auto">
-        Main content for the new automative modal
       </Modal> */}
+
+      <Drawer open={showDrawer} onClose={() => setShowDrawer(false)}>
+        Drawer
+      </Drawer>
     </AppContainer>
   );
 };

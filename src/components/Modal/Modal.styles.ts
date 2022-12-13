@@ -1,7 +1,5 @@
 import {ModalSizeDimension} from './Modal.types';
 
-export const styles = () => {};
-
 export const modalSizes: ModalSizeDimension = {
   xs: {
     width: '320px',
