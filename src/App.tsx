@@ -364,6 +364,10 @@ export const App = () => {
         size="md"
         // overlayOpacity={0.9}
         title="Introduce yourself!">
+  Modal
+      </Modal> */}
+
+      <Drawer open={showDrawer} onClose={() => setShowDrawer(false)}>
         <Form>
           <Label htmlFor="firstName">First Name</Label>
           <Break />
@@ -567,10 +571,6 @@ export const App = () => {
             placeholder="Confirm Password"
           />
         </Form>
-      </Modal> */}
-
-      <Drawer open={showDrawer} onClose={() => setShowDrawer(false)}>
-        Drawer
       </Drawer>
     </AppContainer>
   );
