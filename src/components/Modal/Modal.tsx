@@ -56,7 +56,10 @@ const ModalContainer = styled.div<ModalStyledProps>`
   padding: 20px;
   background: #fff;
   min-height: 0px;
-  width: ${(props) => modalSizes[props.size].width};
+  width: ${(props) =>
+    modalSizes[props.size]
+      ? modalSizes[props.size].width
+      : props.size}; // fix bugs when pixel value is su
   box-shadow: 1px 0px 10px 5px rgb(0 0 0 / 5%),
     -1px 0px 10px 5px rgb(0 0 0 / 5%), 0 1px 10px 5px rgb(0 0 0 / 5%);
 `;
