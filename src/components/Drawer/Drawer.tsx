@@ -7,7 +7,8 @@ import {DrawerSizes, DrawerStyledProps} from './Drawer.types';
 import {DrawerPortal} from 'components/Portals/DrawerPortal';
 import {Backdrop} from 'components/Backdrop';
 import {useClickOutside} from 'hooks/useClickOutside';
-import { useEscapeKey } from 'hooks/useEscapeKey';
+import {useEscapeKey} from 'hooks/useEscapeKey';
+import {resizeDrawer} from 'components/Transitions';
 
 interface Props {
   children?: ReactNode;
@@ -16,6 +17,15 @@ interface Props {
   title?: ReactNode;
   size?: DrawerSizes;
 }
+
+const animateDrawer = keyframes`
+  0% {
+    width: width;
+  }
+  100% {
+    width: width;
+  }
+`;
 
 const DrawerWrapper = styled.div`
   position: fixed;
@@ -31,10 +41,17 @@ const DrawerContainer = styled.div<DrawerStyledProps>`
   height: 100%;
   transition-property: width;
   transition-duration: 2s;
-  width: ${(props) => drawerSizes[props.size].width};
+  width: ${(props) =>
+    drawerSizes[props.size] ? drawerSizes[props.size].width : props.size};
   background: #fff;
   position: fixed;
   top: 0;
+
+  animation-name: ${(props) =>
+    drawerSizes[props.size]
+      ? resizeDrawer(drawerSizes[props.size].width)
+      : resizeDrawer(props.size)};
+  animation-duration: 0.4s;
 `;
 
 const DrawerTitle = styled.div`
@@ -48,11 +65,11 @@ export const Drawer = ({
   open,
   onClose = () => {},
   title,
-  size = 'full',
+  size = '100px',
 }: Props) => {
   const drawerRef = useRef<any>(null);
   useClickOutside(drawerRef, onClose);
-  useEscapeKey(onClose)
+  useEscapeKey(onClose);
   useEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden';

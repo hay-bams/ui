@@ -9,7 +9,6 @@ export const fade = (opacity: number) => keyframes`
   }
 `;
 
-
 export const scale = () => keyframes`
   0% {
     transform: scale(0)
@@ -17,4 +16,13 @@ export const scale = () => keyframes`
   100% {
     transform: scale(1)
   }
+`;
+
+export const resizeDrawer = (width: any) => keyframes`
+0% {
+  width: 0
+}
+100% {
+  width: ${width}
+}
 `;
