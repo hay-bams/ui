@@ -8,7 +8,7 @@ import {DrawerPortal} from 'components/Portals/DrawerPortal';
 import {Backdrop} from 'components/Backdrop';
 import {useClickOutside} from 'hooks/useClickOutside';
 import {useEscapeKey} from 'hooks/useEscapeKey';
-import {resizeDrawer} from 'components/Transitions';
+import {slideDrawer} from 'components/Transitions';
 
 interface Props {
   children?: ReactNode;
@@ -17,15 +17,6 @@ interface Props {
   title?: ReactNode;
   size?: DrawerSizes;
 }
-
-const animateDrawer = keyframes`
-  0% {
-    width: width;
-  }
-  100% {
-    width: width;
-  }
-`;
 
 const DrawerWrapper = styled.div`
   position: fixed;
@@ -49,8 +40,8 @@ const DrawerContainer = styled.div<DrawerStyledProps>`
 
   animation-name: ${(props) =>
     drawerSizes[props.size]
-      ? resizeDrawer(drawerSizes[props.size].width)
-      : resizeDrawer(props.size)};
+      ? slideDrawer(drawerSizes[props.size].width)
+      : slideDrawer(props.size)};
   animation-duration: 0.4s;
 `;
 
@@ -65,7 +56,7 @@ export const Drawer = ({
   open,
   onClose = () => {},
   title,
-  size = '100px',
+  size = 'xs',
 }: Props) => {
   const drawerRef = useRef<any>(null);
   useClickOutside(drawerRef, onClose);

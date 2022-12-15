@@ -402,6 +402,7 @@ export const App = () => {
       </Modal> */}
 
       <Drawer
+      size='500px'
         open={showDrawer}
         onClose={() => setShowDrawer(false)}
         title="Drawer header">

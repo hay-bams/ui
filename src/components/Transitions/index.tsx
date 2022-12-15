@@ -18,7 +18,7 @@ export const scale = () => keyframes`
   }
 `;
 
-export const resizeDrawer = (width: any) => keyframes`
+export const slideDrawer = (width: any) => keyframes`
 0% {
   width: 0
 }
