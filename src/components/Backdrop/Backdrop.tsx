@@ -23,7 +23,7 @@ export const BackdropStyled = styled.div<BackdropProps>`
   opacity: ${(props) => props.overlayOpacity || 0.5};
   height: 100%;
   animation-name: ${(props) => fade(props.overlayOpacity || 0.5)};
-  animation-duration: 600ms;
+  animation-duration: 400ms;
   animation-timing-function: ease;
 `;
 

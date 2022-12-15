@@ -1,5 +1,3 @@
-import { ReactNode } from "react";
-
 export type ModalSizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'auto' | string;
 
 export type ModalStyledSizes = Record<'size', ModalSizes>

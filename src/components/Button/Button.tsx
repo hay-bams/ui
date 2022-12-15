@@ -87,6 +87,7 @@ const ButtonStyled = styled.button<ButtonStyledProps>`
   background: ${(props) => buttonColors[props.color][props.variant]};
   color: ${(props) => textColors[props.color][props.variant]};
   cursor: pointer;
+  outline: none;
   border-radius: ${(props) => borderRadius[props.radius]};
   width: auto;
   text-transform: ${(props) => props.uppercase && 'uppercase'};
