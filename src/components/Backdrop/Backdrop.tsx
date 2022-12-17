@@ -10,7 +10,7 @@ export interface BackdropProps {
   children?: ReactNode;
   show?: boolean;
   onAnimationEnd?: () => void;
-  animationDuration?: string;
+  animationDuration?: number;
 }
 
 export const BackdropContainer = styled.div<BackdropProps>`
@@ -27,7 +27,7 @@ export const BackdropStyled = styled.div<BackdropProps>`
   height: 100%;
   animation-name: ${(props) =>
     props.show ? fade(props.overlayOpacity!) : unFade(props.overlayOpacity!)};
-  animation-duration: ${(props) => props.animationDuration};
+  animation-duration: ${(props) => `${props.animationDuration}ms`};
   animation-timing-function: ease;
   animation-fill-mode: forwards;
 `;
@@ -39,7 +39,7 @@ export const Backdrop = ({
   children,
   show,
   onAnimationEnd = () => {},
-  animationDuration = '250ms',
+  animationDuration = 250,
 }: BackdropProps) => (
   <BackdropContainer overlayBlur={overlayBlur}>
     <BackdropStyled

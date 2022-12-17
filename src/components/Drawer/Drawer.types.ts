@@ -7,7 +7,7 @@ export type DrawerStyledPosition = Record<'position', DrawerPosition>
 
 export interface OtherStyles {
   open?: boolean;
-  animationDuration?: string
+  animationDuration?: number
 }
 
 export type DrawerStyledProps = DrawerStyledSizes & DrawerStyledPosition & OtherStyles;

@@ -14,7 +14,6 @@ import {Backdrop} from 'components/Backdrop';
 import {useClickOutside} from 'hooks/useClickOutside';
 import {useEscapeKey} from 'hooks/useEscapeKey';
 import {slideDrawer, slideDrawerIn} from 'components/Transitions';
-import {useDelayUnmount} from 'hooks/useDelayUnmount';
 
 interface Props {
   children?: ReactNode;
@@ -58,7 +57,7 @@ const DrawerWrapper = styled.div<DrawerStyledProps>`
           props.position,
         )};
   animation-fill-mode: forwards;
-  animation-duration: ${(props) => `${props.animationDuration}ms`};
+  animation-duration: ${(props) =>`${props.animationDuration}ms`};
 `;
 
 const DrawerTitle = styled.div`
@@ -71,7 +70,7 @@ const Box = styled.div`
 
 const DrawerBody = styled.div``;
 
-export const Drawer = ({
+export const DrawerWithAnimationEnd = ({
   children,
   open,
   onClose = () => {},
@@ -82,11 +81,12 @@ export const Drawer = ({
 }: Props) => {
   const drawerRef = useRef<any>(null);
   useClickOutside(drawerRef, onClose);
+  const [show, setShow] = useState(false);
   useEscapeKey(onClose);
-  const render = useDelayUnmount(open!, animationDuration);
   useEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden';
+      setShow(true);
     }
 
     return () => {
@@ -94,7 +94,7 @@ export const Drawer = ({
     };
   }, [open]);
 
-  return render ? (
+  return show ? (
     <DrawerPortal>
       <Backdrop show={open} animationDuration={animationDuration} />
       <DrawerWrapper
@@ -102,7 +102,10 @@ export const Drawer = ({
         size={size}
         position={position}
         open={open}
-        animationDuration={animationDuration}>
+        animationDuration={animationDuration}
+        onAnimationEnd={() => {
+          if (!open) setShow(false);
+        }}>
         {title ? <DrawerTitle>{title}</DrawerTitle> : null}
 
         <DrawerBody>{children}</DrawerBody>
@@ -110,12 +113,3 @@ export const Drawer = ({
     </DrawerPortal>
   ) : null;
 };
-/**
-  * 
-  * 
-  *   animation-duration: 0.2s;
-  animation-name: ${(props) =>
-    drawerSizes[props.size]
-      ? slideDrawer(drawerSizes[props.size].width)
-      : slideDrawer(props.size)};
-  */
