@@ -110,12 +110,3 @@ export const Drawer = ({
     </DrawerPortal>
   ) : null;
 };
-/**
-  * 
-  * 
-  *   animation-duration: 0.2s;
-  animation-name: ${(props) =>
-    drawerSizes[props.size]
-      ? slideDrawer(drawerSizes[props.size].width)
-      : slideDrawer(props.size)};
-  */
