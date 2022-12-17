@@ -1,14 +1,19 @@
-import {ReactNode, useEffect, useRef} from 'react';
-import styled, {keyframes} from 'styled-components';
+import {ReactNode, useEffect, useRef, useState} from 'react';
+import styled, {css} from 'styled-components';
 
-import {drawerSizes} from './Drawer.styles';
-import {DrawerSizes, DrawerStyledProps} from './Drawer.types';
+import {drawerPositions, drawerSizes} from './Drawer.styles';
+import {
+  DrawerPosition,
+  DrawerSizeDimension,
+  DrawerSizes,
+  DrawerStyledProps,
+} from './Drawer.types';
 
 import {DrawerPortal} from 'components/Portals/DrawerPortal';
 import {Backdrop} from 'components/Backdrop';
 import {useClickOutside} from 'hooks/useClickOutside';
 import {useEscapeKey} from 'hooks/useEscapeKey';
-import {slideDrawer} from 'components/Transitions';
+import {slideDrawer, slideDrawerIn} from 'components/Transitions';
 
 interface Props {
   children?: ReactNode;
@@ -16,37 +21,51 @@ interface Props {
   onClose?: () => void;
   title?: ReactNode;
   size?: DrawerSizes;
+  position?: DrawerPosition;
+  animationDuration?: string;
 }
 
-const DrawerWrapper = styled.div`
-  position: fixed;
-  top: 0;
-  z-index: 1;
-  height: 100vh;
-`;
+export const drawerAnimationSize = (
+  dimensions: DrawerSizeDimension,
+  size: string,
+) => (dimensions[size] ? dimensions[size].width : size);
 
-const DrawerContainer = styled.div<DrawerStyledProps>`
-  padding-inline: 20px;
-  padding-block: 20px;
-  overflow-y: scroll;
-  height: 100%;
-  transition-property: width;
-  transition-duration: 2s;
+const DrawerWrapper = styled.div<DrawerStyledProps>`
+  position: fixed;
+  // inset: 0;  top: 0, bottom: 0, left: 0, right: 0. (bottom:0 will make sure the element uses the full height)
+  z-index: 1;
   width: ${(props) =>
     drawerSizes[props.size] ? drawerSizes[props.size].width : props.size};
   background: #fff;
   position: fixed;
-  top: 0;
+  padding-inline: 20px;
+  padding-block: 20px;
+  overflow-y: scroll;
+
+  ${(props) => css`
+    ${drawerPositions(props.position)}
+  `}
 
   animation-name: ${(props) =>
-    drawerSizes[props.size]
-      ? slideDrawer(drawerSizes[props.size].width)
-      : slideDrawer(props.size)};
-  animation-duration: 0.4s;
+    props.open
+      ? slideDrawer(
+          drawerAnimationSize(drawerSizes, props.size),
+          props.position,
+        )
+      : slideDrawerIn(
+          drawerAnimationSize(drawerSizes, props.size),
+          props.position,
+        )};
+  animation-fill-mode: forwards;
+  animation-duration: ${(props) => props.animationDuration};
 `;
 
 const DrawerTitle = styled.div`
   margin-bottom: 20px;
+`;
+
+const Box = styled.div`
+  opacity: 1;
 `;
 
 const DrawerBody = styled.div``;
@@ -57,13 +76,17 @@ export const Drawer = ({
   onClose = () => {},
   title,
   size = 'xs',
+  position = 'left',
+  animationDuration = '300ms',
 }: Props) => {
   const drawerRef = useRef<any>(null);
   useClickOutside(drawerRef, onClose);
+  const [show, setShow] = useState(false);
   useEscapeKey(onClose);
   useEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden';
+      setShow(true);
     }
 
     return () => {
@@ -71,16 +94,31 @@ export const Drawer = ({
     };
   }, [open]);
 
-  return open ? (
+  return show ? (
     <DrawerPortal>
-      <Backdrop />
-      <DrawerWrapper ref={drawerRef}>
-        <DrawerContainer size={size}>
-          {title ? <DrawerTitle>{title}</DrawerTitle> : null}
+      <Backdrop show={open} animationDuration={animationDuration} />
+      <DrawerWrapper
+        ref={drawerRef}
+        size={size}
+        position={position}
+        open={open}
+        animationDuration={animationDuration}
+        onAnimationEnd={() => {
+          if (!open) setShow(false);
+        }}>
+        {title ? <DrawerTitle>{title}</DrawerTitle> : null}
 
-          <DrawerBody>{children}</DrawerBody>
-        </DrawerContainer>
+        <DrawerBody>{children}</DrawerBody>
       </DrawerWrapper>
     </DrawerPortal>
   ) : null;
 };
+/**
+  * 
+  * 
+  *   animation-duration: 0.2s;
+  animation-name: ${(props) =>
+    drawerSizes[props.size]
+      ? slideDrawer(drawerSizes[props.size].width)
+      : slideDrawer(props.size)};
+  */

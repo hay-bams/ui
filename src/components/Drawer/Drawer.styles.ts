@@ -1,4 +1,4 @@
-import { DrawerSizeDimension } from "./Drawer.types";
+import {DrawerPosition, DrawerSizeDimension} from './Drawer.types';
 
 export const drawerSizes: DrawerSizeDimension = {
   xs: {
@@ -18,6 +18,19 @@ export const drawerSizes: DrawerSizeDimension = {
     width: '500px',
   },
   full: {
-    width: '100%'
+    width: '100%',
   },
+};
+
+export const drawerPositions = (position: DrawerPosition) => {
+  switch (position) {
+    case 'right':
+      return {top: 0, right: 0, bottom: 0};
+    case 'top':
+      return {top: 0, left: 0, right: 0,  width: '100%'};
+    case 'bottom':
+      return {bottom: 0, left: 0, right: 0, width: '100%'};
+    default:
+      return {top: 0, left: 0, bottom: 0};
+  }
 };
