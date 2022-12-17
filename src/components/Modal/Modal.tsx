@@ -14,8 +14,9 @@ import {modalSizes} from './Modal.styles';
 import {ModalPortal} from 'components/Portals/ModalPortal';
 import {ReactComponent as CloseIcon} from 'assets/icons/Close.svg';
 import {Backdrop} from 'components/Backdrop';
-import {fade} from 'components/Transitions';
+import {fade, unFade} from 'components/Transitions';
 import {useClickOutside} from 'hooks/useClickOutside';
+import {useDelayUnmount} from 'hooks/useDelayUnmount';
 
 interface Props {
   open?: boolean;
@@ -29,6 +30,7 @@ interface Props {
   overlayOpacity?: number;
   overlayBlur?: number;
   overflow?: ModalOverflowProps;
+  animationDuration?: number;
 }
 
 const ModalWrapper = styled.div`
@@ -47,9 +49,9 @@ const ModalInnerWrapper = styled.div<ModalInnerWrapperProps>`
   height: 100%;
   overflow-y: ${(props) =>
     props.overflow === 'outside' ? 'scroll' : 'hidden'};
-  animation-name: ${() => fade(1)};
-  animation-duration: 600ms;
-  animation-timing-function: ease;
+  // animation-name: ${() => fade(1)};
+  // animation-duration: ${(props) => `${props.animationDuration}ms`};
+  // animation-timing-function: ease;
 `;
 
 const ModalContainer = styled.div<ModalStyledProps>`
@@ -57,9 +59,7 @@ const ModalContainer = styled.div<ModalStyledProps>`
   background: #fff;
   min-height: 0px;
   width: ${(props) =>
-    modalSizes[props.size]
-      ? modalSizes[props.size].width
-      : props.size};
+    modalSizes[props.size] ? modalSizes[props.size].width : props.size};
   box-shadow: 1px 0px 10px 5px rgb(0 0 0 / 5%),
     -1px 0px 10px 5px rgb(0 0 0 / 5%), 0 1px 10px 5px rgb(0 0 0 / 5%);
 `;
@@ -101,9 +101,11 @@ export const Modal = ({
   overlayBlur,
   overlayColor,
   overlayOpacity,
+  animationDuration = 300,
 }: Props) => {
   const modalRef = useRef<any>(null);
   useClickOutside(modalRef, onClose);
+  const render = useDelayUnmount(open!, animationDuration!);
   useEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden';
@@ -116,15 +118,20 @@ export const Modal = ({
 
   return (
     <ModalPortal>
-      {open ? (
+      {render ? (
         <>
           <Backdrop
             overlayBlur={overlayBlur}
             overlayColor={overlayColor}
             overlayOpacity={overlayOpacity}
+            animationDuration={animationDuration}
+            show={open}
           />
           <ModalWrapper>
-            <ModalInnerWrapper centered={centered} overflow={overflow}>
+            <ModalInnerWrapper
+              centered={centered}
+              overflow={overflow}
+              show={open}>
               <ModalContainer size={size} ref={modalRef}>
                 <ModalTitleContainer title={title}>
                   {title ? <ModalTitle>{title}</ModalTitle> : null}

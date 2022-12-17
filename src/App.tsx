@@ -358,7 +358,7 @@ export const App = () => {
         asperiores eaque modi libero ex, perspiciatis totam.
       </p>
 
-      {/* <Modal
+      <Modal
         open={showDrawer}
         onClose={useCallback(() => setShowDrawer(false), [])}
         size="md"
@@ -399,9 +399,9 @@ export const App = () => {
 
 
         </Form>
-      </Modal> */}
+      </Modal>
 
-      <Drawer
+      {/* <Drawer
       size='md'
         open={showDrawer}
         onClose={() => setShowDrawer(false)}
@@ -413,7 +413,7 @@ export const App = () => {
 
 
         </Form>
-      </Drawer>
+      </Drawer> */}
     </AppContainer>
   );
 };

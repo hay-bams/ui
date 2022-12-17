@@ -1,5 +1,6 @@
-import {DrawerPosition} from 'components/Drawer/Drawer.types';
 import {css, keyframes} from 'styled-components';
+
+import {DrawerPosition} from 'components/Drawer/Drawer.types';
 
 export const fade = (opacity: number) => keyframes`
   0% {
