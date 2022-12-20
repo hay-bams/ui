@@ -14,7 +14,7 @@ import {modalSizes} from './Modal.styles';
 import {ModalPortal} from 'components/Portals/ModalPortal';
 import {ReactComponent as CloseIcon} from 'assets/icons/Close.svg';
 import {Backdrop} from 'components/Backdrop';
-import {fade, unFade} from 'components/Transitions';
+import {fade} from 'components/Transitions';
 import {useClickOutside} from 'hooks/useClickOutside';
 import {useDelayUnmount} from 'hooks/useDelayUnmount';
 

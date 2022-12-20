@@ -358,7 +358,7 @@ export const App = () => {
         asperiores eaque modi libero ex, perspiciatis totam.
       </p>
 
-      <Modal
+      {/* <Modal
         open={showDrawer}
         onClose={useCallback(() => setShowDrawer(false), [])}
         size="md"
@@ -399,21 +399,23 @@ export const App = () => {
 
 
         </Form>
-      </Modal>
+      </Modal> */}
 
-      {/* <Drawer
-      size='md'
+      <Drawer
+        size="xl"
         open={showDrawer}
         onClose={() => setShowDrawer(false)}
-        title="Drawer header">
+        title="Drawer header"
+        overlayColor='rgb(233, 236, 239)'
+        overlayOpacity={0.55}
+        overlayBlur={3}
+        >
         <Form>
           <Label htmlFor="firstName">First Name</Label>
           <Break />
           <Input id="firstName" type="text" placeholder="First name" />
-
-
         </Form>
-      </Drawer> */}
+      </Drawer>
     </AppContainer>
   );
 };

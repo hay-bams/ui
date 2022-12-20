@@ -24,6 +24,9 @@ interface Props {
   size?: DrawerSizes;
   position?: DrawerPosition;
   animationDuration?: number;
+  overlayColor?: string;
+  overlayOpacity?: number;
+  overlayBlur?: number;
 }
 
 export const drawerAnimationSize = (
@@ -42,7 +45,8 @@ const DrawerWrapper = styled.div<DrawerStyledProps>`
   padding-inline: 20px;
   padding-block: 20px;
   overflow-y: scroll;
-
+  box-shadow: rgb(0 0 0 / 5%) 0px 1px 3px, rgb(0 0 0 / 5%) 0px 20px 25px -5px,
+    rgb(0 0 0 / 4%) 0px 10px 10px -5px;
   ${(props) => css`
     ${drawerPositions(props.position)}
   `}
@@ -65,10 +69,6 @@ const DrawerTitle = styled.div`
   margin-bottom: 20px;
 `;
 
-const Box = styled.div`
-  opacity: 1;
-`;
-
 const DrawerBody = styled.div``;
 
 export const Drawer = ({
@@ -79,6 +79,9 @@ export const Drawer = ({
   size = 'xs',
   position = 'left',
   animationDuration = 300,
+  overlayBlur,
+  overlayColor,
+  overlayOpacity,
 }: Props) => {
   const drawerRef = useRef<any>(null);
   useClickOutside(drawerRef, onClose);
@@ -96,7 +99,13 @@ export const Drawer = ({
 
   return render ? (
     <DrawerPortal>
-      <Backdrop show={open} animationDuration={animationDuration} />
+      <Backdrop
+        show={open}
+        animationDuration={animationDuration}
+        overlayBlur={overlayBlur}
+        overlayColor={overlayColor}
+        overlayOpacity={overlayOpacity}
+      />
       <DrawerWrapper
         ref={drawerRef}
         size={size}
