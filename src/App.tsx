@@ -6,22 +6,45 @@ import {Modal} from 'components/Modal';
 import {Form, Input, Label} from 'components/Form';
 import {Break} from 'components/Break';
 import {Drawer} from 'components/Drawer';
+import {Table} from 'components/Table/Table';
 
 export const AppContainer = styled.div`
-  // display: flex;
+  display: flex;
 
-  // justify-content: center;
-  // align-items: center;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
 `;
+
+const TableContainer = styled.div`
+ width: 50vw;
+`;
+
+const elements = [
+  {position: 6, mass: 12.011, symbol: 'C', name: 'Carbon'},
+  {position: 7, mass: 14.007, symbol: 'N', name: 'Nitrogen'},
+  {position: 39, mass: 88.906, symbol: 'Y', name: 'Yttrium'},
+  {position: 56, mass: 137.33, symbol: 'Ba', name: 'Barium'},
+  {position: 58, mass: 140.12, symbol: 'Ce', name: 'Cerium'},
+];
 
 export const App = () => {
   const [showDrawer, setShowDrawer] = useState(false);
+  const rows = elements.map((row) => (
+    <tr key={row.name}>
+      <td>{row.position}</td>
+      <td>{row.mass}</td>
+      <td>{row.symbol}</td>
+      <td>{row.name}</td>
+    </tr>
+  ));
   return (
     <AppContainer>
-      <Button size="xs" variant="filled" onClick={() => setShowDrawer(true)}>
+      {/* <Button size="xs" variant="filled" onClick={() => setShowDrawer(true)}>
         Show Drawer
-      </Button>
-      <p>
+      </Button> */}
+      {/* <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi,
         aperiam necessitatibus. Laudantium quisquam possimus reprehenderit
         maiores iure voluptates necessitatibus? Blanditiis expedita in earum
@@ -356,7 +379,7 @@ export const App = () => {
         molestiae esse voluptate consectetur, ducimus doloremque delectus!
         Assumenda perferendis iste dignissimos a doloremque quos, fugiat vero
         asperiores eaque modi libero ex, perspiciatis totam.
-      </p>
+      </p> */}
 
       {/* <Modal
         open={showDrawer}
@@ -401,7 +424,7 @@ export const App = () => {
         </Form>
       </Modal> */}
 
-      <Drawer
+      {/* <Drawer
         size="xl"
         open={showDrawer}
         onClose={() => setShowDrawer(false)}
@@ -415,7 +438,21 @@ export const App = () => {
           <Break />
           <Input id="firstName" type="text" placeholder="First name" />
         </Form>
-      </Drawer>
+      </Drawer> */}
+
+     <TableContainer>
+     <Table>
+        <thead>
+          <tr>
+            <th>Element position</th>
+            <th>Element name</th>
+            <th>Symbol</th>
+            <th>Atomic mass</th>
+          </tr>
+        </thead>
+        <tbody>{rows}</tbody>
+      </Table>
+     </TableContainer>
     </AppContainer>
   );
 };
