@@ -11,7 +11,7 @@ interface AccordionProps {
 }
 
 interface AccordionItemProps {
-  children?:  ReactElement | ReactElement[];
+  children?: ReactElement | ReactElement[];
 }
 
 interface AccordionControlProps {
@@ -57,22 +57,9 @@ const AccordionBody = styled.div<AccordionState>`
   overflow: hidden;
 `;
 
-export const Accordion = ({children, chevron}: AccordionProps) => {
-  const [addAnimation, setAddAnimation] = useState(false);
-
-  useEffect(() => {
-    let timeout: any;
-    if (addAnimation) {
-      window.setTimeout(() => {
-        timeout = setAddAnimation(false);
-      }, 1000);
-    }
-
-    return () => window.clearTimeout(timeout);
-  }, [addAnimation]);
-
-  return <AccordionContainer>{children}</AccordionContainer>;
-};
+export const Accordion = ({children, chevron}: AccordionProps) => (
+  <AccordionContainer>{children}</AccordionContainer>
+);
 
 const AccordionItem = ({children}: AccordionItemProps) => {
   const [open, setOpen] = useState(false);
