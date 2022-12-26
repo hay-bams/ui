@@ -34,6 +34,7 @@ interface Props {
 }
 
 const ModalWrapper = styled.div`
+  box-sizing: border-box;
   position: fixed;
   inset: 0;
   height: 100vh;

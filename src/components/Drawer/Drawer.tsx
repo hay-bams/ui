@@ -38,6 +38,7 @@ const DrawerWrapper = styled.div<DrawerStyledProps>`
   position: fixed;
   // inset: 0;  top: 0, bottom: 0, left: 0, right: 0. (bottom:0 will make sure the element uses the full height)
   z-index: 1;
+  box-sizing: border-box;
   width: ${(props) =>
     drawerSizes[props.size] ? drawerSizes[props.size].width : props.size};
   background: #fff;

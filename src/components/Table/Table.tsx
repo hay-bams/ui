@@ -14,6 +14,7 @@ interface Props {
 }
 
 const TableStyled = styled.table<TableStyledProps>`
+  box-sizing: border-box;
   width: 100%;
   border-collapse: collapse;
   & td {

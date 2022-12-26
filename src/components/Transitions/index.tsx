@@ -83,3 +83,13 @@ export const slideDrawerIn = (
   `} ;
 }
 `;
+
+export const AnimateAccordion = () => keyframes`
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 100%;
+  }
+`;
+
