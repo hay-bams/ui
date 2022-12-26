@@ -64,9 +64,12 @@ export const Accordion = ({children, chevron}: AccordionProps) => (
 const AccordionItem = ({children}: AccordionItemProps) => {
   const [open, setOpen] = useState(false);
   const UpdateChildren = () =>
-    React.Children.map(children, (child) => {
+    React.Children.map(children, (child, index) => {
       if (child) {
-        return React.cloneElement(child, {open, setOpen});
+        return React.cloneElement(child, {
+          open,
+          setOpen: index === 0 && setOpen,
+        });
       }
     });
   return (
