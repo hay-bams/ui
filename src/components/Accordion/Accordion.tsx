@@ -69,7 +69,7 @@ const AccordionBody = styled.div<AccordionState>`
 export const Accordion = ({
   children,
   chevron,
-  variant = 'contained',
+  variant = 'default',
 }: AccordionProps) => {
   const updateChildren = () =>
     React.Children.map(children, (child) => {
