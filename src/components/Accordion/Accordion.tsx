@@ -71,7 +71,7 @@ export const Accordion = ({
   chevron,
   variant = 'contained',
 }: AccordionProps) => {
-  const UpdateChildren = () =>
+  const updateChildren = () =>
     React.Children.map(children, (child) => {
       if (child) {
         return React.cloneElement(child, {
@@ -79,12 +79,12 @@ export const Accordion = ({
         });
       }
     });
-  return <AccordionContainer>{UpdateChildren()}</AccordionContainer>;
+  return <AccordionContainer>{updateChildren()}</AccordionContainer>;
 };
 
 const AccordionItem = ({children, variant}: AccordionItemProps) => {
   const [open, setOpen] = useState(false);
-  const UpdateChildren = () =>
+  const updateChildren = () =>
     React.Children.map(children, (child, index) => {
       if (child) {
         return React.cloneElement(child, {
@@ -95,7 +95,7 @@ const AccordionItem = ({children, variant}: AccordionItemProps) => {
     });
   return (
     <AccordionContentContainer variant={variant} open={open}>
-      {UpdateChildren()}
+      {updateChildren()}
     </AccordionContentContainer>
   );
 };
