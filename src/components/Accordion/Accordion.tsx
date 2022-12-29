@@ -1,17 +1,25 @@
 import React, {ReactElement, ReactNode, useEffect, useState} from 'react';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 
-import {AccordionState} from './Accordion.types';
+import {
+  AccordionContentContainerStyled,
+  AccordionState,
+  AccordionVariants,
+  Variant,
+} from './Accordion.types';
 
 import {ReactComponent as AccordionArrowDownIcon} from 'assets/icons/ArrowDown.svg';
+import {accordionVariantStyles} from './Accordion.styles';
 
 interface AccordionProps {
   children?: ReactElement | ReactElement[];
   chevron?: ReactNode;
+  variant?: Variant;
 }
 
 interface AccordionItemProps {
   children?: ReactElement | ReactElement[];
+  variant?: Variant;
 }
 
 interface AccordionControlProps {
@@ -25,9 +33,11 @@ const AccordionContainer = styled.div`
   width: 100%;
   box-sizing: border-box;
 `;
-const AccordionContentContainer = styled.div`
+const AccordionContentContainer = styled.div<AccordionContentContainerStyled>`
   box-sizing: border-box;
-  border-bottom: 1px solid rgb(222, 226, 230);
+  ${(props) => css`
+    ${accordionVariantStyles(props.variant!, !!props.open)};
+  `}
 `;
 const AccordionTitleContainer = styled.div`
   box-sizing: border-box;
@@ -57,11 +67,23 @@ const AccordionBody = styled.div<AccordionState>`
   overflow: hidden;
 `;
 
-export const Accordion = ({children, chevron}: AccordionProps) => (
-  <AccordionContainer>{children}</AccordionContainer>
-);
+export const Accordion = ({
+  children,
+  chevron,
+  variant = 'contained',
+}: AccordionProps) => {
+  const UpdateChildren = () =>
+    React.Children.map(children, (child) => {
+      if (child) {
+        return React.cloneElement(child, {
+          variant
+        });
+      }
+    });
+  return <AccordionContainer>{UpdateChildren()}</AccordionContainer>;
+};
 
-const AccordionItem = ({children}: AccordionItemProps) => {
+const AccordionItem = ({children, variant}: AccordionItemProps) => {
   const [open, setOpen] = useState(false);
   const UpdateChildren = () =>
     React.Children.map(children, (child, index) => {
@@ -73,7 +95,9 @@ const AccordionItem = ({children}: AccordionItemProps) => {
       }
     });
   return (
-    <AccordionContentContainer>{UpdateChildren()}</AccordionContentContainer>
+    <AccordionContentContainer variant={variant} open={open}>
+      {UpdateChildren()}
+    </AccordionContentContainer>
   );
 };
 
