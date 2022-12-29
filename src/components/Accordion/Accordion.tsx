@@ -1,15 +1,14 @@
-import React, {ReactElement, ReactNode, useEffect, useState} from 'react';
+import React, {ReactElement, ReactNode, useState} from 'react';
 import styled, {css} from 'styled-components';
 
 import {
   AccordionContentContainerStyled,
   AccordionState,
-  AccordionVariants,
   Variant,
 } from './Accordion.types';
+import {accordionVariantStyles} from './Accordion.styles';
 
 import {ReactComponent as AccordionArrowDownIcon} from 'assets/icons/ArrowDown.svg';
-import {accordionVariantStyles} from './Accordion.styles';
 
 interface AccordionProps {
   children?: ReactElement | ReactElement[];
