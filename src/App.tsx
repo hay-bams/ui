@@ -4,11 +4,13 @@ import styled from 'styled-components';
 import {Accordion} from 'components/Accordion';
 
 export const AppContainer = styled.div`
-  // display: flex;
+  display: flex;
+  flex-direction: column;
 
-  // justify-content: center;
-  // align-items: center;
+  justify-content: center;
+  align-items: center;
   height: 100vh;
+
 `;
 
 const AccordionContainer = styled.div`
