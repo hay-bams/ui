@@ -8,6 +8,7 @@ export interface AccordionState {
   open?: boolean;
   chevronPosition?: ChevronPosition;
   addAnimation?: boolean;
+  disableChevronRotation?: boolean;
 }
 
 export interface AccordionVariants {
@@ -21,6 +22,7 @@ export interface AccordionContextState {
   variant: Variant;
   chevronPosition: ChevronPosition;
   chevron: ReactNode;
+  disableChevronRotation: boolean;
 }
 
 export interface AccordionItemContextState {

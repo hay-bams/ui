@@ -15,12 +15,14 @@ interface Props {
   chevron: ReactNode;
   variant: Variant;
   chevronPosition: ChevronPosition;
+  disableChevronRotation: boolean;
 }
 
 const defaultValue: AccordionContextState = {
   variant: 'default',
   chevronPosition: 'right',
   chevron: null,
+  disableChevronRotation: false
 };
 
 export const AccordionContext =
@@ -31,12 +33,14 @@ export const AccordionProvider = ({
   variant,
   chevronPosition,
   chevron,
+  disableChevronRotation
 }: Props) => (
     <AccordionContext.Provider
       value={{
         variant,
         chevronPosition,
         chevron,
+        disableChevronRotation
       }}>
       {children}
     </AccordionContext.Provider>
