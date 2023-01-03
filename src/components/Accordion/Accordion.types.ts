@@ -1,4 +1,4 @@
-import {ReactElement, ReactNode} from 'react';
+import {ReactNode} from 'react';
 
 export type Variant = 'default' | 'contained' | 'filled' | 'separated';
 
@@ -6,15 +6,12 @@ export type ChevronPosition = 'left' | 'right';
 
 export interface AccordionState {
   open?: boolean;
+  chevronPosition?: ChevronPosition;
   addAnimation?: boolean;
 }
 
 export interface AccordionVariants {
   variant?: Variant;
-}
-
-export interface AccordionTitleStyled {
-  chevronPosition?: ChevronPosition;
 }
 
 export type AccordionContentContainerStyled = AccordionVariants &

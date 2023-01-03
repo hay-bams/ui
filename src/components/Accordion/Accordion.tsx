@@ -1,10 +1,9 @@
-import React, {ReactElement, ReactNode, useContext, useState} from 'react';
+import {ReactElement, ReactNode, useContext} from 'react';
 import styled, {css} from 'styled-components';
 
 import {
   AccordionContentContainerStyled,
   AccordionState,
-  AccordionTitleStyled,
   ChevronPosition,
   Variant,
 } from './Accordion.types';
@@ -44,7 +43,7 @@ const AccordionContentContainer = styled.div<AccordionContentContainerStyled>`
     ${accordionVariantStyles(props.variant!, !!props.open)};
   `}
 `;
-const AccordionTitleContainer = styled.div<AccordionTitleStyled>`
+const AccordionTitleContainer = styled.div<AccordionState>`
   box-sizing: border-box;
   padding: 16px 8px;
   display: flex;
@@ -65,6 +64,7 @@ const ArrowDownIcon = styled(AccordionArrowDownIcon)<AccordionState>`
   box-sizing: border-box;
   transition: transform 200ms ease 0s;
   transform: ${(props) => props.open && 'rotate(180deg)'};
+  margin-right: ${(props) => props.chevronPosition === 'left' && '12px'};
 `;
 const AccordionBody = styled.div<AccordionState>`
   box-sizing: border-box;
@@ -78,8 +78,8 @@ const AccordionBody = styled.div<AccordionState>`
 export const Accordion = ({
   children,
   chevron,
-  variant = 'filled',
-  chevronPosition = 'right',
+  variant = 'contained',
+  chevronPosition = 'left',
 }: AccordionProps) => (
   <AccordionProvider
     variant={variant}
@@ -112,7 +112,7 @@ const AccordionControl = ({children}: AccordionControlProps) => {
     <AccordionTitleContainer
       onClick={() => handleChange()}
       chevronPosition={chevronPosition}>
-      {chevron ? chevron : <ArrowDownIcon open={open} />}
+      {chevron ? chevron : <ArrowDownIcon open={open}       chevronPosition={chevronPosition} />}
       <AccordionTitle>{children}</AccordionTitle>
     </AccordionTitleContainer>
   );
