@@ -6,9 +6,9 @@ export type ChevronPosition = 'left' | 'right';
 
 export interface AccordionState {
   open?: boolean;
-  chevronPosition?: ChevronPosition;
+  $chevronPosition?: ChevronPosition;
   addAnimation?: boolean;
-  disableChevronRotation?: boolean;
+  $disableChevronRotation?: boolean;
 }
 
 export interface AccordionVariants {
@@ -23,9 +23,10 @@ export interface AccordionContextState {
   chevronPosition: ChevronPosition;
   chevron: ReactNode;
   disableChevronRotation: boolean;
+  handleChange: (current: string) => void;
+  activeItem: string | null
 }
 
 export interface AccordionItemContextState {
-  open: boolean;
-  handleChange: () => void;
+  value: string
 }

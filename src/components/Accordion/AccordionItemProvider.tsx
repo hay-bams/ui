@@ -1,43 +1,25 @@
 import {
   ReactElement,
-  ReactNode,
   createContext,
-  useEffect,
-  useState,
+  
 } from 'react';
 
-import {
-  AccordionItemContextState,
-} from './Accordion.types';
+import {AccordionItemContextState} from './Accordion.types';
 
 interface Props {
   children?: ReactElement | ReactElement[];
+  value: string;
 }
 
 const defaultValue: AccordionItemContextState = {
- 
-  open: false,
-  handleChange: () => {},
+  value: '',
 };
 
 export const AccordionItemContext =
   createContext<AccordionItemContextState>(defaultValue);
 
-export const AccordionItemProvider = ({children}: Props) => {
-  const [open, setOpen] = useState(false);
-
-  const handleChange = () => {
-    setOpen(!open);
-  };
-
-  return (
-    <AccordionItemContext.Provider
-      value={{
- 
-        open,
-        handleChange,
-      }}>
-      {children}
-    </AccordionItemContext.Provider>
-  );
-};
+export const AccordionItemProvider = ({children, value}: Props) => (
+  <AccordionItemContext.Provider value={{value}}>
+    {children}
+  </AccordionItemContext.Provider>
+);

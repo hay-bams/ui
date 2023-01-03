@@ -26,12 +26,15 @@ interface AccordionProps {
 
 interface AccordionItemProps {
   children?: ReactElement | ReactElement[];
+  value: string;
+}
+
+interface AccordionItemContentProps {
+  children?: ReactElement | ReactElement[];
 }
 
 interface AccordionControlProps {
   children?: ReactNode;
-  open?: boolean;
-  setOpen?: (open: boolean) => void;
 }
 
 const AccordionContainer = styled.div`
@@ -49,7 +52,7 @@ const AccordionTitleContainer = styled.div<AccordionState>`
   padding: 16px 8px;
   display: flex;
   flex-direction: ${(props) =>
-    props.chevronPosition === 'right' ? 'row-reverse' : 'row'};
+    props.$chevronPosition === 'right' ? 'row-reverse' : 'row'};
   cursor: pointer;
   &:hover {
     background: rgb(248, 249, 250);
@@ -65,8 +68,8 @@ const ArrowDownIcon = styled(AccordionArrowDownIcon)<AccordionState>`
   box-sizing: border-box;
   transition: transform 200ms ease 0s;
   transform: ${(props) =>
-    props.open && !props.disableChevronRotation && 'rotate(180deg)'};
-  margin-right: ${(props) => props.chevronPosition === 'left' && '12px'};
+    props.open && !props.$disableChevronRotation && 'rotate(180deg)'};
+  margin-right: ${(props) => props.$chevronPosition === 'left' && '12px'};
 `;
 const AccordionBody = styled.div<AccordionState>`
   box-sizing: border-box;
@@ -93,37 +96,45 @@ export const Accordion = ({
   </AccordionProvider>
 );
 
-const AccordionContent = ({children}: AccordionItemProps) => {
-  const {open} = useContext(AccordionItemContext);
-  const {variant} = useContext(AccordionContext);
+const AccordionItemContent = ({children}: AccordionItemContentProps) => {
+  const {variant, activeItem} = useContext(AccordionContext);
+  const {value} = useContext(AccordionItemContext);
   return (
-    <AccordionContentContainer variant={variant} open={open}>
+    <AccordionContentContainer
+      variant={variant}
+      open={!!(activeItem === value)}>
       {children}
     </AccordionContentContainer>
   );
 };
 
-const AccordionItem = ({children}: AccordionItemProps) => (
-  <AccordionItemProvider>
-    <AccordionContent>{children}</AccordionContent>
+const AccordionItem = ({children, value}: AccordionItemProps) => (
+  <AccordionItemProvider value={value}>
+    <AccordionItemContent>{children}</AccordionItemContent>
   </AccordionItemProvider>
 );
 
 const AccordionControl = ({children}: AccordionControlProps) => {
-  const {open, handleChange} = useContext(AccordionItemContext);
-  const {chevronPosition, chevron, disableChevronRotation} =
-    useContext(AccordionContext);
+  const {
+    chevronPosition,
+    chevron,
+    disableChevronRotation,
+    handleChange,
+    activeItem,
+  } = useContext(AccordionContext);
+  const {value} = useContext(AccordionItemContext);
+
   return (
     <AccordionTitleContainer
-      onClick={() => handleChange()}
-      chevronPosition={chevronPosition}>
+      onClick={() => handleChange(value)}
+      $chevronPosition={chevronPosition}>
       {chevron ? (
         chevron
       ) : (
         <ArrowDownIcon
-          open={open}
-          chevronPosition={chevronPosition}
-          disableChevronRotation={disableChevronRotation}
+          open={!!(activeItem === value)}
+          $chevronPosition={chevronPosition}
+          $disableChevronRotation={disableChevronRotation}
         />
       )}
       <AccordionTitle>{children}</AccordionTitle>
@@ -132,8 +143,11 @@ const AccordionControl = ({children}: AccordionControlProps) => {
 };
 
 const AccordionPanel = ({children}: AccordionControlProps) => {
-  const {open} = useContext(AccordionItemContext);
-  return <AccordionBody open={open}>{children}</AccordionBody>;
+  const {activeItem} = useContext(AccordionContext);
+  const {value} = useContext(AccordionItemContext);
+  return (
+    <AccordionBody open={!!(activeItem === value)}>{children}</AccordionBody>
+  );
 };
 
 Accordion.Item = AccordionItem;

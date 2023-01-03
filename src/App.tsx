@@ -79,7 +79,7 @@ export const App = () => {
 
       <AccordionContainer>
         <Accordion>
-          <Accordion.Item>
+          <Accordion.Item value='Customization'>
             <Accordion.Control>Customization</Accordion.Control>
             <Accordion.Panel>
               Colors, fonts, shadows and many other parts are customizable to
@@ -87,7 +87,7 @@ export const App = () => {
             </Accordion.Panel>
           </Accordion.Item>
 
-          <Accordion.Item>
+          <Accordion.Item value='Flexibility'>
             <Accordion.Control>Flexibility</Accordion.Control>
             <Accordion.Panel>
               Configure components appearance and behavior with vast amount of
@@ -95,7 +95,7 @@ export const App = () => {
             </Accordion.Panel>
           </Accordion.Item>
 
-          <Accordion.Item>
+          <Accordion.Item value='No annoying focus ring'>
             <Accordion.Control>No annoying focus ring</Accordion.Control>
             <Accordion.Panel>
               With new :focus-visible pseudo-class focus ring appears only when
