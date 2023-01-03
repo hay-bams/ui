@@ -8,8 +8,6 @@ import {
 
 import {
   AccordionItemContextState,
-  ChevronPosition,
-  Variant,
 } from './Accordion.types';
 
 interface Props {

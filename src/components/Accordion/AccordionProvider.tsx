@@ -1,8 +1,4 @@
-import {
-  ReactElement,
-  ReactNode,
-  createContext,
-} from 'react';
+import {ReactElement, ReactNode, createContext, useMemo} from 'react';
 
 import {
   AccordionContextState,
@@ -22,7 +18,7 @@ const defaultValue: AccordionContextState = {
   variant: 'default',
   chevronPosition: 'right',
   chevron: null,
-  disableChevronRotation: false
+  disableChevronRotation: false,
 };
 
 export const AccordionContext =
@@ -33,15 +29,20 @@ export const AccordionProvider = ({
   variant,
   chevronPosition,
   chevron,
-  disableChevronRotation
-}: Props) => (
-    <AccordionContext.Provider
-      value={{
-        variant,
-        chevronPosition,
-        chevron,
-        disableChevronRotation
-      }}>
+  disableChevronRotation,
+}: Props) => {
+  const contextValue = useMemo(
+    () => ({
+      variant,
+      chevronPosition,
+      chevron,
+      disableChevronRotation,
+    }),
+    [variant, chevronPosition, chevron, disableChevronRotation],
+  );
+  return (
+    <AccordionContext.Provider value={contextValue}>
       {children}
     </AccordionContext.Provider>
   );
+};
