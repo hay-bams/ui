@@ -69,30 +69,30 @@ export const App = () => {
         </Form>
       </Modal>
       <Break />
-
+  {/* TODO: Accordion height should be responsive */}
       <AccordionContainer>
         <Accordion>
-          <Accordion.Item value="Customization">
-            <Accordion.Control>Customization</Accordion.Control>
+          <Accordion.Item value="Accordion item 1">
+            <Accordion.Control>Accordion item 1</Accordion.Control>
             <Accordion.Panel>
-              Colors, fonts, shadows and many other parts are customizable to
-              fit your design needs
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex
+              veritatis dolor fuga, ea deleniti et natus cupiditate. Minima
             </Accordion.Panel>
           </Accordion.Item>
 
-          <Accordion.Item value="Flexibility">
-            <Accordion.Control>Flexibility</Accordion.Control>
+          <Accordion.Item value="Accordion item 2">
+            <Accordion.Control>Accordion item 2</Accordion.Control>
             <Accordion.Panel>
-              Configure components appearance and behavior with vast amount of
-              settings or overwrite any part of component styles
+              Veniam fugiat neque illo tenetur culpa reiciendis fuga, quod
+              similique doloremque nisi deserunt itaque numquam tempora animi
             </Accordion.Panel>
           </Accordion.Item>
 
-          <Accordion.Item value="No annoying focus ring">
-            <Accordion.Control>No annoying focus ring</Accordion.Control>
+          <Accordion.Item value="Accordion item 3">
+            <Accordion.Control>Accordion item 3</Accordion.Control>
             <Accordion.Panel>
-              With new :focus-visible pseudo-class focus ring appears only when
-              user navigates with keyboard
+              Assumenda quibusdam voluptatibus optio praesentium temporibus,
+              sequi rem itaque provident eveniet aliquid laboriosam earum
             </Accordion.Panel>
           </Accordion.Item>
         </Accordion>
