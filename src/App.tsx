@@ -1,7 +1,11 @@
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 import styled from 'styled-components';
 
 import {Accordion} from 'components/Accordion';
+import {Form, Input, Label} from 'components/Form';
+import {Break} from 'components/Break';
+import {Modal} from 'components/Modal';
+import {Button} from 'components/Button';
 
 export const AppContainer = styled.div`
   display: flex;
@@ -10,32 +14,23 @@ export const AppContainer = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-
 `;
 
 const AccordionContainer = styled.div`
   width: 30vw;
 `;
 
-const elements = [
-  {position: 6, mass: 12.011, symbol: 'C', name: 'Carbon'},
-  {position: 7, mass: 14.007, symbol: 'N', name: 'Nitrogen'},
-  {position: 39, mass: 88.906, symbol: 'Y', name: 'Yttrium'},
-  {position: 56, mass: 137.33, symbol: 'Ba', name: 'Barium'},
-  {position: 58, mass: 140.12, symbol: 'Ce', name: 'Cerium'},
-];
-
 export const App = () => {
-  const [showDrawer, setShowDrawer] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   return (
     <AppContainer>
-      {/* <Button size="xs" variant="filled" onClick={() => setShowDrawer(true)}>
-        Show Drawer
-      </Button> */}
+      <Button size="xs" variant="filled" onClick={() => setShowModal(true)}>
+        Show Modal
+      </Button>
 
-      {/* <Modal
-        open={showDrawer}
-        onClose={useCallback(() => setShowDrawer(false), [])}
+      <Modal
+        open={showModal}
+        onClose={useCallback(() => setShowModal(false), [])}
         size="md"
         // overlayOpacity={0.9}
         title="Introduce yourself!">
@@ -71,15 +66,13 @@ export const App = () => {
             type="password"
             placeholder="Confirm Password"
           />
-
-
         </Form>
-      </Modal> */}
-
+      </Modal>
+      <Break />
 
       <AccordionContainer>
         <Accordion>
-          <Accordion.Item value='Customization'>
+          <Accordion.Item value="Customization">
             <Accordion.Control>Customization</Accordion.Control>
             <Accordion.Panel>
               Colors, fonts, shadows and many other parts are customizable to
@@ -87,7 +80,7 @@ export const App = () => {
             </Accordion.Panel>
           </Accordion.Item>
 
-          <Accordion.Item value='Flexibility'>
+          <Accordion.Item value="Flexibility">
             <Accordion.Control>Flexibility</Accordion.Control>
             <Accordion.Panel>
               Configure components appearance and behavior with vast amount of
@@ -95,7 +88,7 @@ export const App = () => {
             </Accordion.Panel>
           </Accordion.Item>
 
-          <Accordion.Item value='No annoying focus ring'>
+          <Accordion.Item value="No annoying focus ring">
             <Accordion.Control>No annoying focus ring</Accordion.Control>
             <Accordion.Panel>
               With new :focus-visible pseudo-class focus ring appears only when
