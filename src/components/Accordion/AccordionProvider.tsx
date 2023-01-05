@@ -53,21 +53,24 @@ export const AccordionProvider = ({
 
   const handleChange = useCallback(
     (currentItem: string) => {
-      const updateState = (updater: (val: string | null) => void) => {
-        if (currentItem !== activeItem) {
+      const updateState = (
+        updater: (val: string | null) => void,
+        activeValue?: string | null,
+      ) => {
+        if (currentItem !== activeValue) {
+          console.log(currentItem, '+++++', activeItem);
           updater(currentItem);
         } else {
           updater('');
         }
       };
       if (onChange) {
-        console.log('+++++')
-        updateState(onChange);
+        updateState(onChange, value);
       } else {
-        updateState(setActiveItem);
+        updateState(setActiveItem, activeItem);
       }
     },
-    [activeItem, onChange],
+    [activeItem, onChange, value],
   );
 
   const contextValue = useMemo(
@@ -78,9 +81,9 @@ export const AccordionProvider = ({
       disableChevronRotation:
         disableChevronRotation || defaultValue.disableChevronRotation,
       handleChange: handleChange || defaultValue.handleChange,
-      activeItem: onChange ? value! : (activeItem || defaultValue.activeItem),
+      activeItem: onChange ? value! : activeItem || defaultValue.activeItem,
       styles: styles || defaultValue.styles,
-      transitionDuration: transitionDuration || defaultValue.transitionDuration
+      transitionDuration: transitionDuration || defaultValue.transitionDuration,
     }),
     [
       variant,
@@ -92,7 +95,7 @@ export const AccordionProvider = ({
       styles,
       transitionDuration,
       value,
-      onChange
+      onChange,
     ],
   );
   return (
