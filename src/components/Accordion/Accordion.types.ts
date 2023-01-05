@@ -1,4 +1,4 @@
-import {ReactElement, ReactNode} from 'react';
+import {ReactElement} from 'react';
 
 export type Variant = 'default' | 'contained' | 'filled' | 'separated';
 
@@ -27,7 +27,7 @@ export interface AccordionContextState {
   handleChange: (current: string) => void;
   activeItem: string | null;
   styles?: AccordionCustomStyles;
-  transitionDuration?: number
+  transitionDuration?: number;
 }
 
 export interface AccordionItemContextState {

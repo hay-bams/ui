@@ -25,6 +25,8 @@ interface AccordionProps {
   disableChevronRotation?: boolean;
   styles?: AccordionCustomStyles;
   transitionDuration?: number;
+  value?: string | null;
+  onChange?: (val: string| null) => void;
 }
 
 interface AccordionItemProps {
@@ -92,6 +94,8 @@ export const Accordion = ({
   disableChevronRotation = false,
   styles,
   transitionDuration,
+  value,
+  onChange
 }: AccordionProps) => (
   <AccordionProvider
     variant={variant}
@@ -99,7 +103,10 @@ export const Accordion = ({
     chevron={chevron}
     disableChevronRotation={disableChevronRotation}
     styles={styles}
-    transitionDuration={transitionDuration}>
+    transitionDuration={transitionDuration}
+    value={value}
+    onChange={onChange}
+    >
     <AccordionContainer>{children}</AccordionContainer>
   </AccordionProvider>
 );
@@ -133,7 +140,6 @@ const AccordionControl = ({children}: AccordionControlProps) => {
     transitionDuration,
   } = useContext(AccordionContext);
   const {value} = useContext(AccordionItemContext);
-  // props.open && !props.$disableChevronRotation
   const open = !!(activeItem === value);
   const udateChevron = () => {
     if (chevron) {

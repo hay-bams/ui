@@ -21,6 +21,8 @@ interface Props {
   disableChevronRotation: boolean;
   styles?: AccordionCustomStyles;
   transitionDuration?: number;
+  value?: string | null;
+  onChange?: (val: string | null) => void;
 }
 
 const defaultValue: AccordionContextState = {
@@ -44,18 +46,28 @@ export const AccordionProvider = ({
   disableChevronRotation,
   styles,
   transitionDuration,
+  onChange,
+  value,
 }: Props) => {
   const [activeItem, setActiveItem] = useState<string | null>(null);
 
   const handleChange = useCallback(
     (currentItem: string) => {
-      if (currentItem !== activeItem) {
-        setActiveItem(currentItem);
+      const updateState = (updater: (val: string | null) => void) => {
+        if (currentItem !== activeItem) {
+          updater(currentItem);
+        } else {
+          updater('');
+        }
+      };
+      if (onChange) {
+        console.log('+++++')
+        updateState(onChange);
       } else {
-        setActiveItem('');
+        updateState(setActiveItem);
       }
     },
-    [activeItem],
+    [activeItem, onChange],
   );
 
   const contextValue = useMemo(
@@ -66,9 +78,9 @@ export const AccordionProvider = ({
       disableChevronRotation:
         disableChevronRotation || defaultValue.disableChevronRotation,
       handleChange: handleChange || defaultValue.handleChange,
-      activeItem: activeItem || defaultValue.activeItem,
+      activeItem: onChange ? value! : (activeItem || defaultValue.activeItem),
       styles: styles || defaultValue.styles,
-      transitionDuration: transitionDuration || defaultValue.transitionDuration,
+      transitionDuration: transitionDuration || defaultValue.transitionDuration
     }),
     [
       variant,
@@ -79,6 +91,8 @@ export const AccordionProvider = ({
       activeItem,
       styles,
       transitionDuration,
+      value,
+      onChange
     ],
   );
   return (

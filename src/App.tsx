@@ -22,6 +22,7 @@ const AccordionContainer = styled.div`
 `;
 
 export const App = () => {
+  const [value, setValue] = useState<string | null>(null);
   const [showModal, setShowModal] = useState(false);
   return (
     <AppContainer>
@@ -73,9 +74,12 @@ export const App = () => {
       {/* TODO: Accordion height should be responsive */}
       <AccordionContainer>
         <Accordion
-        transitionDuration={1000}
+          transitionDuration={1000}
           chevron={<IconPlus />}
-          styles={{chevron: {transform: 'rotate(45deg)'}}}>
+          styles={{chevron: {transform: 'rotate(45deg)'}}}
+          value={value}
+          onChange={setValue}
+          >
           <Accordion.Item value="Accordion item 1">
             <Accordion.Control>Accordion item 1</Accordion.Control>
             <Accordion.Panel>
