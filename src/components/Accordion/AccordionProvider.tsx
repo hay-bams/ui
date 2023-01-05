@@ -20,6 +20,7 @@ interface Props {
   chevronPosition: ChevronPosition;
   disableChevronRotation: boolean;
   styles?: AccordionCustomStyles;
+  transitionDuration?: number;
 }
 
 const defaultValue: AccordionContextState = {
@@ -29,6 +30,7 @@ const defaultValue: AccordionContextState = {
   handleChange: () => {},
   activeItem: null,
   styles: {},
+  transitionDuration: 200,
 };
 
 export const AccordionContext =
@@ -41,6 +43,7 @@ export const AccordionProvider = ({
   chevron,
   disableChevronRotation,
   styles,
+  transitionDuration,
 }: Props) => {
   const [activeItem, setActiveItem] = useState<string | null>(null);
 
@@ -65,6 +68,7 @@ export const AccordionProvider = ({
       handleChange: handleChange || defaultValue.handleChange,
       activeItem: activeItem || defaultValue.activeItem,
       styles: styles || defaultValue.styles,
+      transitionDuration: transitionDuration || defaultValue.transitionDuration,
     }),
     [
       variant,
@@ -74,6 +78,7 @@ export const AccordionProvider = ({
       handleChange,
       activeItem,
       styles,
+      transitionDuration,
     ],
   );
   return (

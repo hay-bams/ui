@@ -73,6 +73,7 @@ export const App = () => {
       {/* TODO: Accordion height should be responsive */}
       <AccordionContainer>
         <Accordion
+        transitionDuration={1000}
           chevron={<IconPlus />}
           styles={{chevron: {transform: 'rotate(45deg)'}}}>
           <Accordion.Item value="Accordion item 1">

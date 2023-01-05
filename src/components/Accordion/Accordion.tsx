@@ -24,6 +24,7 @@ interface AccordionProps {
   chevronPosition?: ChevronPosition;
   disableChevronRotation?: boolean;
   styles?: AccordionCustomStyles;
+  transitionDuration?: number;
 }
 
 interface AccordionItemProps {
@@ -68,7 +69,7 @@ const AccordionTitle = styled.div`
 
 const ArrowDownIcon = styled(AccordionArrowDownIcon)<AccordionState>`
   box-sizing: border-box;
-  transition: transform 200ms ease 0s;
+  transition: ${(props) => `transform ${props.transitionDuration}ms`};
   transform: ${(props) =>
     props.open && !props.$disableChevronRotation && 'rotate(180deg)'};
   margin-right: ${(props) => props.$chevronPosition === 'left' && '12px'};
@@ -77,7 +78,8 @@ const AccordionBody = styled.div<AccordionState>`
   box-sizing: border-box;
   padding: 5px 15px;
   height: ${(props) => (props.open ? '68px' : '0')};
-  transition: height 200ms ease 0s, opacity 200ms ease 0s;
+  transition: ${(props) =>
+    `height ${props.transitionDuration}ms, opacity ${props.transitionDuration}ms`};
   opacity: ${(props) => (props.open ? '1' : '0')};
   overflow: hidden;
 `;
@@ -89,13 +91,15 @@ export const Accordion = ({
   chevronPosition = 'right',
   disableChevronRotation = false,
   styles,
+  transitionDuration,
 }: AccordionProps) => (
   <AccordionProvider
     variant={variant}
     chevronPosition={chevronPosition}
     chevron={chevron}
     disableChevronRotation={disableChevronRotation}
-    styles={styles}>
+    styles={styles}
+    transitionDuration={transitionDuration}>
     <AccordionContainer>{children}</AccordionContainer>
   </AccordionProvider>
 );
@@ -126,6 +130,7 @@ const AccordionControl = ({children}: AccordionControlProps) => {
     handleChange,
     activeItem,
     styles,
+    transitionDuration,
   } = useContext(AccordionContext);
   const {value} = useContext(AccordionItemContext);
   // props.open && !props.$disableChevronRotation
@@ -136,7 +141,7 @@ const AccordionControl = ({children}: AccordionControlProps) => {
         style:
           open && !disableChevronRotation
             ? {
-                transition: 'transform 200ms ease 0s',
+                transition: `transform ${transitionDuration}ms`,
                 ...styles?.chevron,
               }
             : null,
@@ -152,6 +157,7 @@ const AccordionControl = ({children}: AccordionControlProps) => {
         udateChevron()
       ) : (
         <ArrowDownIcon
+          transitionDuration={transitionDuration}
           open={!!(activeItem === value)}
           $chevronPosition={chevronPosition}
           $disableChevronRotation={disableChevronRotation}
@@ -163,10 +169,14 @@ const AccordionControl = ({children}: AccordionControlProps) => {
 };
 
 const AccordionPanel = ({children}: AccordionControlProps) => {
-  const {activeItem} = useContext(AccordionContext);
+  const {activeItem, transitionDuration} = useContext(AccordionContext);
   const {value} = useContext(AccordionItemContext);
   return (
-    <AccordionBody open={!!(activeItem === value)}>{children}</AccordionBody>
+    <AccordionBody
+      transitionDuration={transitionDuration}
+      open={!!(activeItem === value)}>
+      {children}
+    </AccordionBody>
   );
 };
 

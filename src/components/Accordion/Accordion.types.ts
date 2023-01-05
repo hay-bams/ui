@@ -9,6 +9,7 @@ export interface AccordionState {
   $chevronPosition?: ChevronPosition;
   addAnimation?: boolean;
   $disableChevronRotation?: boolean;
+  transitionDuration?: number
 }
 
 export interface AccordionVariants {
@@ -26,6 +27,7 @@ export interface AccordionContextState {
   handleChange: (current: string) => void;
   activeItem: string | null;
   styles?: AccordionCustomStyles;
+  transitionDuration?: number
 }
 
 export interface AccordionItemContextState {
