@@ -6,6 +6,7 @@ import {Form, Input, Label} from 'components/Form';
 import {Break} from 'components/Break';
 import {Modal} from 'components/Modal';
 import {Button} from 'components/Button';
+import {ReactComponent as IconPlus} from 'assets/icons/IconPlus.svg';
 
 export const AppContainer = styled.div`
   display: flex;
@@ -69,9 +70,11 @@ export const App = () => {
         </Form>
       </Modal>
       <Break />
-  {/* TODO: Accordion height should be responsive */}
+      {/* TODO: Accordion height should be responsive */}
       <AccordionContainer>
-        <Accordion>
+        <Accordion
+          chevron={<IconPlus />}
+          styles={{chevron: {transform: 'rotate(45deg)'}}}>
           <Accordion.Item value="Accordion item 1">
             <Accordion.Control>Accordion item 1</Accordion.Control>
             <Accordion.Panel>

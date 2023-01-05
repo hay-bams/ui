@@ -1,8 +1,9 @@
-import {ReactElement, ReactNode, useContext} from 'react';
+import React, {ReactElement, ReactNode, useContext} from 'react';
 import styled, {css} from 'styled-components';
 
 import {
   AccordionContentContainerStyled,
+  AccordionCustomStyles,
   AccordionState,
   ChevronPosition,
   Variant,
@@ -18,10 +19,11 @@ import {ReactComponent as AccordionArrowDownIcon} from 'assets/icons/ArrowDown.s
 
 interface AccordionProps {
   children?: ReactElement | ReactElement[];
-  chevron?: ReactNode;
+  chevron?: ReactElement;
   variant?: Variant;
   chevronPosition?: ChevronPosition;
   disableChevronRotation?: boolean;
+  styles?: AccordionCustomStyles;
 }
 
 interface AccordionItemProps {
@@ -84,14 +86,16 @@ export const Accordion = ({
   children,
   chevron,
   variant = 'contained',
-  chevronPosition = 'left',
+  chevronPosition = 'right',
   disableChevronRotation = false,
+  styles,
 }: AccordionProps) => (
   <AccordionProvider
     variant={variant}
     chevronPosition={chevronPosition}
     chevron={chevron}
-    disableChevronRotation={disableChevronRotation}>
+    disableChevronRotation={disableChevronRotation}
+    styles={styles}>
     <AccordionContainer>{children}</AccordionContainer>
   </AccordionProvider>
 );
@@ -121,15 +125,31 @@ const AccordionControl = ({children}: AccordionControlProps) => {
     disableChevronRotation,
     handleChange,
     activeItem,
+    styles,
   } = useContext(AccordionContext);
   const {value} = useContext(AccordionItemContext);
+  // props.open && !props.$disableChevronRotation
+  const open = !!(activeItem === value);
+  const udateChevron = () => {
+    if (chevron) {
+      return React.cloneElement(chevron, {
+        style:
+          open && !disableChevronRotation
+            ? {
+                transition: 'transform 200ms ease 0s',
+                ...styles?.chevron,
+              }
+            : null,
+      });
+    }
+  };
 
   return (
     <AccordionTitleContainer
       onClick={() => handleChange(value)}
       $chevronPosition={chevronPosition}>
       {chevron ? (
-        chevron
+        udateChevron()
       ) : (
         <ArrowDownIcon
           open={!!(activeItem === value)}

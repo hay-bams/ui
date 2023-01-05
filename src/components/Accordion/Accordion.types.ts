@@ -1,4 +1,4 @@
-import {ReactNode} from 'react';
+import {ReactElement, ReactNode} from 'react';
 
 export type Variant = 'default' | 'contained' | 'filled' | 'separated';
 
@@ -21,12 +21,17 @@ export type AccordionContentContainerStyled = AccordionVariants &
 export interface AccordionContextState {
   variant: Variant;
   chevronPosition: ChevronPosition;
-  chevron: ReactNode;
+  chevron?: ReactElement;
   disableChevronRotation: boolean;
   handleChange: (current: string) => void;
-  activeItem: string | null
+  activeItem: string | null;
+  styles?: AccordionCustomStyles;
 }
 
 export interface AccordionItemContextState {
-  value: string
+  value: string;
+}
+
+export interface AccordionCustomStyles {
+  chevron?: any;
 }
