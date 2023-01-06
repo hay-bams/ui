@@ -16,6 +16,7 @@ interface TabsListProps {
 interface TabProps {
   children?: ReactNode;
   value: string | null;
+  icon?: ReactNode;
 }
 
 interface TabPanelProps {
@@ -69,12 +70,13 @@ const TabsLists = ({children}: TabsListProps) => {
   return <TabsListStyled>{children}</TabsListStyled>;
 };
 
-const Tab = ({children, value}: TabProps) => {
+const Tab = ({children, value, icon}: TabProps) => {
   const {activeTab, handleTabChange} = useContext(TabsContext);
   return (
     <TabStyled
       active={!!(activeTab === value)}
       onClick={() => handleTabChange(value)}>
+      {icon}
       {children}
     </TabStyled>
   );

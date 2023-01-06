@@ -9,6 +9,10 @@ import {Button} from 'components/Button';
 import {ReactComponent as IconPlus} from 'assets/icons/IconPlus.svg';
 import {Tabs} from 'components/Tabs/Tabs';
 
+import {ReactComponent as GalleryIcon} from 'assets/icons/Gallery.svg';
+import {ReactComponent as MessageIcon} from 'assets/icons/Message.svg';
+import {ReactComponent as SettingsIcon} from 'assets/icons/Settings.svg';
+
 export const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -107,11 +111,11 @@ export const App = () => {
         
         <Break />
 
-        <Tabs defaultValue='tab3'>
+        <Tabs defaultValue='tab1'>
           <Tabs.List>
-            <Tabs.Tab value='tab1'>Tab1</Tabs.Tab>
-            <Tabs.Tab value='tab2'>Tab2</Tabs.Tab>
-            <Tabs.Tab value='tab3'>Tab3</Tabs.Tab>
+            <Tabs.Tab value='tab1' icon={<GalleryIcon style={{marginRight: '5px'}} />}>Tab1</Tabs.Tab>
+            <Tabs.Tab value='tab2' icon={<MessageIcon style={{marginRight: '5px'}} />}>Tab2</Tabs.Tab>
+            <Tabs.Tab value='tab3' icon={<SettingsIcon style={{marginRight: '5px'}} />}>Tab3</Tabs.Tab>
           </Tabs.List>
 
           <Tabs.Panel value='tab1'>Panel 1</Tabs.Panel>
