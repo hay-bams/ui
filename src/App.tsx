@@ -7,6 +7,7 @@ import {Break} from 'components/Break';
 import {Modal} from 'components/Modal';
 import {Button} from 'components/Button';
 import {ReactComponent as IconPlus} from 'assets/icons/IconPlus.svg';
+import {Tabs} from 'components/Tabs/Tabs';
 
 export const AppContainer = styled.div`
   display: flex;
@@ -17,7 +18,7 @@ export const AppContainer = styled.div`
   height: 100vh;
 `;
 
-const AccordionContainer = styled.div`
+const SectionContainer = styled.div`
   width: 30vw;
 `;
 
@@ -26,11 +27,11 @@ export const App = () => {
   const [showModal, setShowModal] = useState(false);
   return (
     <AppContainer>
-      <Button size="xs" variant="filled" onClick={() => setShowModal(true)}>
+      {/* <Button size="xs" variant="filled" onClick={() => setShowModal(true)}>
         Show Modal
-      </Button>
+      </Button> */}
 
-      <Modal
+      {/* <Modal
         open={showModal}
         onClose={useCallback(() => setShowModal(false), [])}
         size="md"
@@ -69,17 +70,16 @@ export const App = () => {
             placeholder="Confirm Password"
           />
         </Form>
-      </Modal>
+      </Modal> */}
       <Break />
       {/* TODO: Accordion height should be responsive */}
-      <AccordionContainer>
-        <Accordion
+      <SectionContainer>
+        {/* <Accordion
           transitionDuration={1000}
           chevron={<IconPlus />}
           styles={{chevron: {transform: 'rotate(45deg)'}}}
           value={value}
-          onChange={setValue}
-          >
+          onChange={setValue}>
           <Accordion.Item value="Accordion item 1">
             <Accordion.Control>Accordion item 1</Accordion.Control>
             <Accordion.Panel>
@@ -103,8 +103,24 @@ export const App = () => {
               sequi rem itaque provident eveniet aliquid laboriosam earum
             </Accordion.Panel>
           </Accordion.Item>
-        </Accordion>
-      </AccordionContainer>
+        </Accordion> */}
+        
+        <Break />
+
+        <Tabs>
+          <Tabs.List>
+            <Tabs.Tab value='tab1'>Tab1</Tabs.Tab>
+            <Tabs.Tab value='tab2'>Tab2</Tabs.Tab>
+            <Tabs.Tab value='tab3'>Tab3</Tabs.Tab>
+          </Tabs.List>
+
+          <Tabs.Panel>Panel 1</Tabs.Panel>
+
+          <Tabs.Panel>Panel 2</Tabs.Panel>
+
+          <Tabs.Panel>Panel 3</Tabs.Panel>
+        </Tabs>
+      </SectionContainer>
     </AppContainer>
   );
 };
