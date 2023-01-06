@@ -107,18 +107,18 @@ export const App = () => {
         
         <Break />
 
-        <Tabs>
+        <Tabs defaultValue='tab3'>
           <Tabs.List>
             <Tabs.Tab value='tab1'>Tab1</Tabs.Tab>
             <Tabs.Tab value='tab2'>Tab2</Tabs.Tab>
             <Tabs.Tab value='tab3'>Tab3</Tabs.Tab>
           </Tabs.List>
 
-          <Tabs.Panel>Panel 1</Tabs.Panel>
+          <Tabs.Panel value='tab1'>Panel 1</Tabs.Panel>
 
-          <Tabs.Panel>Panel 2</Tabs.Panel>
+          <Tabs.Panel value='tab2'>Panel 2</Tabs.Panel>
 
-          <Tabs.Panel>Panel 3</Tabs.Panel>
+          <Tabs.Panel value='tab3'>Panel 3</Tabs.Panel>
         </Tabs>
       </SectionContainer>
     </AppContainer>

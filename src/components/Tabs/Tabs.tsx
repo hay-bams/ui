@@ -2,7 +2,7 @@ import {ReactNode, useContext} from 'react';
 import styled from 'styled-components';
 
 import {TabsContext, TabsProvider} from './TabsProvider';
-import {TabStyledProps} from './Tabs.types';
+import {TabPanelStyledProps, TabStyledProps} from './Tabs.types';
 
 interface TabsProps {
   children?: ReactNode;
@@ -20,6 +20,7 @@ interface TabProps {
 
 interface TabPanelProps {
   children?: ReactNode;
+  value: string | null;
 }
 
 const TabsStyled = styled.div`
@@ -52,9 +53,10 @@ const TabStyled = styled.button<TabStyledProps>`
   }
 `;
 
-const TabPanel = styled.div`
+const TabPanel = styled.div<TabPanelStyledProps>`
   box-sizing: border-box;
   margin-top: 10px;
+  display: ${(props) => !props.active && 'none'}
 `;
 
 export const Tabs = ({children, defaultValue = ''}: TabsProps) => (
@@ -78,8 +80,9 @@ const Tab = ({children, value}: TabProps) => {
   );
 };
 
-const TabsPanel = ({children}: TabPanelProps) => {
-  return <TabPanel>{children}</TabPanel>;
+const TabsPanel = ({children, value}: TabPanelProps) => {
+  const {activeTab} = useContext(TabsContext);
+  return <TabPanel  active={!!(activeTab === value)}>{children}</TabPanel>;
 };
 
 Tabs.List = TabsLists;

@@ -14,7 +14,7 @@ const defaultContextValue: TabsContextState = {
 
 export const TabsContext = createContext<TabsContextState>(defaultContextValue);
 
-export const TabsProvider = ({children ,defaultValue}: TabsProviderProps) => {
+export const TabsProvider = ({children, defaultValue}: TabsProviderProps) => {
   const [activeTab, setActiveTab] = useState<string | null>(null);
 
   const handleTabChange = useCallback(

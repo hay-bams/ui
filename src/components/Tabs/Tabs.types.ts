@@ -12,3 +12,7 @@ export interface TabsListsContextState {
 export interface TabStyledProps {
   active: boolean;
 }
+
+export interface TabPanelStyledProps {
+  active: boolean;
+}
