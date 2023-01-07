@@ -1,12 +1,19 @@
 import {ReactNode, useContext} from 'react';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 
 import {TabsContext, TabsProvider} from './TabsProvider';
-import {TabPanelStyledProps, TabStyledProps} from './Tabs.types';
+import {
+  TabListStyledProps,
+  TabPanelStyledProps,
+  TabStyledProps,
+  TabsVariant,
+} from './Tabs.types';
+import {tabListVariantStyles, tabVariantStyles} from './Tabs.styles';
 
 interface TabsProps {
   children?: ReactNode;
   defaultValue?: string;
+  variant?: TabsVariant;
 }
 
 interface TabsListProps {
@@ -29,10 +36,12 @@ const TabsStyled = styled.div`
   width: 100%;
 `;
 
-const TabsListStyled = styled.div`
+const TabsListStyled = styled.div<TabListStyledProps>`
   box-sizing: border-box;
   display: flex;
-  border-bottom: 2px solid #dee2e6;
+  ${(props) => css`
+    ${tabListVariantStyles(props.variant)}
+  `}
 `;
 
 const TabStyled = styled.button<TabStyledProps>`
@@ -43,37 +52,41 @@ const TabStyled = styled.button<TabStyledProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 2px solid transparent;
-  border-color: ${(props) => props.active && 'red'};
-  margin-bottom: -2px;
   padding: 10px 16px;
   cursor: pointer;
-  &:hover {
-    background: #f8f9fa;
-    border-color:  ${(props) => props.active ? 'red' :  '#dee2e6'};
-  }
+  position: relative;
+  border-radius: 4px 4px 0px 0px;
+  ${(props) => css`
+    ${tabVariantStyles(props.variant, props.active)};
+  `};
 `;
 
 const TabPanel = styled.div<TabPanelStyledProps>`
   box-sizing: border-box;
   margin-top: 10px;
-  display: ${(props) => !props.active && 'none'}
+  display: ${(props) => !props.active && 'none'};
 `;
 
-export const Tabs = ({children, defaultValue = ''}: TabsProps) => (
-  <TabsProvider defaultValue={defaultValue}>
+export const Tabs = ({
+  children,
+  defaultValue = '',
+  variant = 'default',
+}: TabsProps) => (
+  <TabsProvider defaultValue={defaultValue} variant={variant}>
     <TabsStyled>{children}</TabsStyled>
   </TabsProvider>
 );
 
 const TabsLists = ({children}: TabsListProps) => {
-  return <TabsListStyled>{children}</TabsListStyled>;
+  const {variant} = useContext(TabsContext);
+  return <TabsListStyled variant={variant}>{children}</TabsListStyled>;
 };
 
 const Tab = ({children, value, icon}: TabProps) => {
-  const {activeTab, handleTabChange} = useContext(TabsContext);
+  const {activeTab, handleTabChange, variant} = useContext(TabsContext);
   return (
     <TabStyled
+      variant={variant}
       active={!!(activeTab === value)}
       onClick={() => handleTabChange(value)}>
       {icon}
@@ -84,7 +97,7 @@ const Tab = ({children, value, icon}: TabProps) => {
 
 const TabsPanel = ({children, value}: TabPanelProps) => {
   const {activeTab} = useContext(TabsContext);
-  return <TabPanel  active={!!(activeTab === value)}>{children}</TabPanel>;
+  return <TabPanel active={!!(activeTab === value)}>{children}</TabPanel>;
 };
 
 Tabs.List = TabsLists;
